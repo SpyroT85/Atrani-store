@@ -26,6 +26,9 @@ const FeaturedProducts = () => {
                   alt="ZX9 Chronograph" 
                   className="w-100 h-100 object-contain" 
                   style={{ zIndex: 2 }}
+                  width="400"
+                  height="400"
+                  loading="lazy"
                 />
               </div>
               {/* Circular accent */}
@@ -49,6 +52,9 @@ const FeaturedProducts = () => {
               alt="Vintage Fountain Pen" 
               className="relative w-full md:w-auto h-auto md:h-full object-contain rounded-xl" 
               style={{ maxWidth: 'clamp(200px, 50%, 40%)', marginLeft: '0', marginRight: '0', marginBottom: '1rem' }}
+              width="360"
+              height="320"
+              loading="lazy"
             />
             <div className="relative z-10" style={{ marginLeft: 'clamp(0px, 2vw, 20px)' }}>
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-black">VINTAGE FOUNTAIN PEN</h2>
@@ -77,6 +83,9 @@ const FeaturedProducts = () => {
                 src="/images/compass1.png" 
                 alt="compass-vintage" 
                 className="w-full h-full object-cover rounded-xl" 
+                width="450"
+                height="320"
+                loading="lazy"
               />
             </div>
           </div>
@@ -90,6 +99,9 @@ const FeaturedProducts = () => {
                   src="/images/inkwell1.png"
                   alt="Atrani Craftsmanship"
                   className="w-full h-full object-contain rounded-xl"
+                  width="384"
+                  height="384"
+                  loading="lazy"
                 />
               </div>
             </div>

@@ -26,7 +26,9 @@ const Navbar = () => {
         src="/images/atrani.png?v=2" 
         alt="Atrani Logo" 
         className="filter invert" 
-        style={{ height: '28px', width: '96px', marginLeft: 'clamp(0px, 30vw, 380px)', objectFit: 'fill' }} 
+        style={{ height: '28px', width: '96px', marginLeft: 'clamp(0px, 30vw, 380px)', objectFit: 'fill' }}
+        width="96"
+        height="28"
       />
     </div>
     

@@ -36,6 +36,9 @@ const Hero = () => {
             alt="Old Town Pocket Watch" 
             className="w-64 sm:w-80 md:w-130 h-64 sm:h-80 md:h-130 object-contain" 
             style={{ marginLeft: 'clamp(-1rem, -5vw, -5rem)' }}
+            width="520"
+            height="520"
+            fetchPriority="high"
           />
         </div>
       </div>

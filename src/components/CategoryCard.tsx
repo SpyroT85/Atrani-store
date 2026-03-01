@@ -15,7 +15,7 @@ const CategoryCard = ({ image, title }: CategoryCardProps) => {
   return (
     <div className="flex flex-col items-center cursor-pointer transition relative w-full max-w-[280px] mx-auto" style={{ paddingTop: '3rem' }}>
       <div className="flex items-center justify-center" style={{ position: 'relative', zIndex: 2, marginBottom: '-6rem' }}>
-        <img src={image} alt={`${title}`} className="object-contain" style={imageStyle} />
+        <img src={image} alt={`${title}`} className="object-contain" style={imageStyle} width="200" height="200" loading="lazy" />
       </div>
       <div className="w-full rounded-xl flex flex-col items-center" style={{ backgroundColor: '#E5E7EB', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)', paddingTop: '7rem', paddingBottom: '2.5rem', paddingLeft: '2rem', paddingRight: '2rem' }}>
         <h3 className="font-bold uppercase tracking-wider text-black" style={{ fontSize: '15px', letterSpacing: '0.1em' }}>{title}</h3>

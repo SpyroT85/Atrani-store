@@ -11,7 +11,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, description, image, rev
   <div className={`flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center justify-center bg-white overflow-hidden w-full mx-auto gap-8 md:gap-24`} style={{ maxWidth: '1100px' }}>
     <div className="shrink-0 bg-gray-100 flex items-center justify-center rounded-2xl overflow-hidden w-full max-w-sm md:max-w-none" style={{ width: '100%', maxWidth: 'min(450px, 100%)', height: 'auto', aspectRatio: '1/1' }}>
       {image ? (
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+        <img src={image} alt={name} className="w-full h-full object-cover" width="450" height="450" loading="lazy" />
       ) : (
         <div className="w-full h-full bg-linear-to-br from-gray-200 to-gray-100 flex items-center justify-center">
           <span className="text-gray-400 text-lg">[Image]</span>
