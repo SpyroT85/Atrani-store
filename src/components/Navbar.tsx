@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,19 +8,42 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { BiShoppingBag } from "react-icons/bi";
+import { IoIosMenu } from "react-icons/io";
 import { Link } from 'react-router-dom';
 
-const Navbar = () => (
-  <nav className="grid grid-cols-3 items-center px-4 md:px-12 py-14 md:py-16 bg-background text-white" style={{ minHeight: '60px', fontFamily: '-apple-system, BlinkMacSystemFont' }}>
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+
+  const toggleSection = (section: string) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
+
+  return (
+  <nav className="relative grid grid-cols-3 items-center px-4 md:px-12 py-14 md:py-16 bg-background text-white" style={{ minHeight: '60px', fontFamily: '-apple-system, BlinkMacSystemFont' }}>
     <div className="flex items-center" style={{ justifyContent: 'flex-start' }}>
       <img 
         src="/images/atrani.png?v=2" 
         alt="Atrani Logo" 
         className="filter invert" 
-        style={{ height: '28px', width: '96px', marginLeft: '380px', objectFit: 'fill' }} 
+        style={{ height: '28px', width: '96px', marginLeft: 'clamp(0px, 30vw, 380px)', objectFit: 'fill' }} 
       />
     </div>
-    <div className="flex justify-center gap-12 uppercase font-bold tracking-wider" style={{ fontSize: '11px', marginLeft: '120px' }}>
+    
+    {/* Hamburger Menu Button (Mobile Only) */}
+    <button 
+      onClick={() => {
+        console.log('Menu toggled:', !isMobileMenuOpen);
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+      }}
+      className="md:hidden flex justify-center items-center hover:text-[#A67C52] transition border border-white/20 rounded p-2"
+      aria-label="Toggle mobile menu"
+    >
+      <IoIosMenu className="w-8 h-8" />
+    </button>
+
+    {/* Desktop Navigation */}
+    <div className="hidden md:flex justify-center gap-4 md:gap-12 uppercase font-bold tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(8px, 1vw, 11px)', marginLeft: 'clamp(0px, 10vw, 120px)' }}>
       <a href="#home" className="hover:text-[#A67C52] transition cursor-pointer">Home</a>
       <DropdownMenu>
         <DropdownMenuTrigger className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition outline-none bg-transparent border-none cursor-pointer" style={{ fontSize: '11px' }}>Watches</DropdownMenuTrigger>
@@ -73,6 +97,86 @@ const Navbar = () => (
       </DropdownMenu>
       <a href="#contact" className="hover:text-[#A67C52] transition cursor-pointer" style={{ whiteSpace: 'nowrap', display: 'inline-block', position: 'relative', zIndex: 10 }}>Contact Us</a>
     </div>
+
+    {/* Mobile Navigation Menu */}
+    {isMobileMenuOpen && (
+      <div className="md:hidden absolute top-full left-0 right-0 bg-[#1a1a1a] border-t border-[#A67C52] z-100 shadow-xl">
+        <div className="flex flex-col uppercase font-bold tracking-wider text-sm text-center" style={{ paddingTop: '16px', paddingBottom: '16px', paddingLeft: '24px', paddingRight: '24px' }}>
+          <a href="#home" className="hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }} onClick={() => setIsMobileMenuOpen(false)}>Home</a>
+          
+          <div>
+            <button 
+              onClick={() => toggleSection('watches')}
+              className="w-full text-center hover:text-[#A67C52] transition cursor-pointer"
+              style={{ paddingTop: '16px', paddingBottom: '16px' }}
+            >
+              WATCHES
+            </button>
+            {expandedSection === 'watches' && (
+              <div className="flex flex-col gap-4 pb-4 text-xs">
+                <Link to="/luxury" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Luxury</Link>
+                <Link to="/casual" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Casual</Link>
+                <Link to="/pocket" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Pocket</Link>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <button 
+              onClick={() => toggleSection('pens')}
+              className="w-full text-center hover:text-[#A67C52] transition cursor-pointer"
+              style={{ paddingTop: '16px', paddingBottom: '16px' }}
+            >
+              PENS
+            </button>
+            {expandedSection === 'pens' && (
+              <div className="flex flex-col gap-4 pb-4 text-xs">
+                <a href="#quill" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Quill Pens</a>
+                <a href="#steel" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Steel Nib Pens</a>
+                <a href="#fountain" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Fountain Pens</a>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <button 
+              onClick={() => toggleSection('inkwells')}
+              className="w-full text-center hover:text-[#A67C52] transition cursor-pointer"
+              style={{ paddingTop: '16px', paddingBottom: '16px' }}
+            >
+              INKWELLS
+            </button>
+            {expandedSection === 'inkwells' && (
+              <div className="flex flex-col gap-4 pb-4 text-xs">
+                <a href="#crystal" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Crystal Inkwells</a>
+                <a href="#brass-ink" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Brass Inkwells</a>
+                <a href="#traveling" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Traveling Inkwells</a>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <button 
+              onClick={() => toggleSection('compasses')}
+              className="w-full text-center hover:text-[#A67C52] transition cursor-pointer"
+              style={{ paddingTop: '16px', paddingBottom: '16px' }}
+            >
+              COMPASSES
+            </button>
+            {expandedSection === 'compasses' && (
+              <div className="flex flex-col gap-4 pb-4 text-xs">
+                <a href="#brass-compass" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Brass Compasses</a>
+                <a href="#pocket-compass" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Pocket Compasses</a>
+                <a href="#nautical" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Nautical Compasses</a>
+              </div>
+            )}
+          </div>
+
+          <a href="#contact" className="hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }} onClick={() => setIsMobileMenuOpen(false)}>Contact Us</a>
+        </div>
+      </div>
+    )}
+
     <div className="flex justify-end" style={{ marginRight: '300px' }}>
       <DropdownMenu>
         <DropdownMenuTrigger className="hover:text-[#A67C52] data-[state=open]:text-[#A67C52] transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none">
@@ -101,6 +205,7 @@ const Navbar = () => (
       </DropdownMenu>
     </div>
   </nav>
-);
+  );
+};
 
 export default Navbar;
