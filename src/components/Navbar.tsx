@@ -82,7 +82,7 @@ const Navbar = () => {
           src="/images/atrani.webp?v=2" 
           alt="Atrani Logo" 
           className="filter invert" 
-          style={{ height: '28px', width: '96px', marginLeft: 'clamp(0px, 32vw, 400px)', objectFit: 'fill', transform: 'translateX(52px)' }}
+          style={{ height: '28px', width: '96px', marginLeft: 'clamp(180px, 38vw, 540px)', objectFit: 'fill' }}
           width="96"
           height="28"
         />
@@ -134,9 +134,9 @@ const Navbar = () => {
         <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 px-6 py-6 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', padding: '8px', borderTop: '3px solid #A67C52' }}>
           <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
           <DropdownMenuGroup>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Brass Compasses</DropdownMenuItem>
+            <DropdownMenuItem className="hover:bg-[#BFA57A]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Brass Compasses</DropdownMenuItem>
             <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Pocket Compasses</DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Nautical Compasses</DropdownMenuItem>
+            <DropdownMenuItem className="hover:bg-[#BFA57A]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Nautical Compasses</DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

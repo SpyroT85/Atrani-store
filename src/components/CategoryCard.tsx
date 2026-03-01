@@ -5,7 +5,7 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ image, title }: CategoryCardProps) => {
   // Only apply bottom shadow to PNG images
-  const isPng = image.toLowerCase().endsWith('.webp');
+  const isPng = image.toLowerCase().endsWith('.png');
   const imageStyle: React.CSSProperties = {
     width: 'clamp(120px, 20vw, 200px)',
     height: 'clamp(120px, 20vw, 200px)',

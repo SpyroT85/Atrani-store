@@ -15,8 +15,10 @@ const Hero = () => {
             <span className="uppercase tracking-[0.5em] text-xs" style={{ color: '#A67C52', marginLeft: '0.35rem' }}>Featured Timepiece</span>
             <h1 className="text-4xl md:text-6xl font-bold mt-4 mb-2 leading-tight tracking-wide text-white">
               OLD TOWN<br/>POCKET WATCH
+              <div style={{ height: '20px' }}></div>
             </h1>
             <p className="text-white/50 text-sm tracking-wider mb-6" style={{ fontFamily: 'monospace' }}>REF. OT-1883</p>
+            <div style={{ height: '20px' }}></div>
             <p className="text-white/70 max-w-md text-base md:text-lg leading-relaxed mx-auto md:mx-0 mt-4 md:mt-0">
               A restored masterpiece from 1883. Where timeless craftsmanship meets the golden age of horology.
             </p>

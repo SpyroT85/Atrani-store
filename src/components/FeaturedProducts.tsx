@@ -9,7 +9,7 @@ const FeaturedProducts = () => {
         <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', padding: '0 16px' }}>
           <div className="featured-zx9-box rounded-xl overflow-hidden flex flex-col md:flex-row items-center justify-center p-6 sm:p-12 md:p-12 relative" style={{ background: '#BFA57A' }}>
           <div className="md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left heritage-text" style={{ zIndex: 3, paddingBottom: '2rem', paddingTop: '1rem' }}>
-              <h2 className="text-white font-bold mb-6" style={{ fontSize: 'clamp(32px, 6vw, 56px)', lineHeight: '1.1' }}>
+              <h2 className="text-white font-bold" style={{ fontSize: 'clamp(28px, 5vw, 46px)', lineHeight: '1.1', marginBottom: '1.2rem' }}>
                 HERITAGE<br />DIVER
               </h2>
               <p className="text-white/90 mb-10 max-w-xs mx-auto md:mx-0 md:max-w-md" style={{ fontSize: '16px', fontWeight: 400 }}>
@@ -118,7 +118,7 @@ const FeaturedProducts = () => {
             </div>
             <div className="rounded-xl overflow-hidden p-6 sm:p-12 md:p-16 flex items-center order-2 md:order-1" style={{ background: '#BFA57A' }}>
               <div className="brass-text flex flex-col items-center md:items-start text-center md:text-left" style={{ paddingTop: '2rem', paddingBottom: '2.5rem' }}>
-                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">
+                <h2 className="text-3xl md:text-4xl font-bold text-white" style={{ marginBottom: '1.2rem' }}>
                   BRASS NAVIGATOR<br />
                   COMPASS
                 </h2>

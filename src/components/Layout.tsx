@@ -13,7 +13,6 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="flex-grow">
         {children}
       </main>
-      <div className="h-16 md:h-20"></div>
       <Footer />
     </div>
   );
