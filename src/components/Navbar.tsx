@@ -78,14 +78,14 @@ const Navbar = () => {
     <div className="hidden md:grid grid-cols-3 items-center" style={{ paddingTop: '12px' }}>
       {/* Logo left */}
       <div className="flex items-center" style={{ justifyContent: 'flex-start' }}>
-        <img 
-          src="/images/atrani.webp?v=2" 
-          alt="Atrani Logo" 
-          className="filter invert" 
-          style={{ height: '28px', width: '96px', marginLeft: 'clamp(180px, 38vw, 540px)', objectFit: 'fill' }}
-          width="96"
-          height="28"
-        />
+            <img 
+              src="/images/atrani.webp?v=2" 
+              alt="Atrani Logo" 
+              className="filter invert" 
+              style={{ height: '28px', width: '96px', marginLeft: 'clamp(100px, 23vw, 500px)', objectFit: 'fill' }}
+              width="96"
+              height="28"
+            />
       </div>
       {/* Desktop Navigation center */}
       <div className="flex justify-center gap-4 md:gap-12 uppercase font-bold tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(8px, 1vw, 11px)', marginLeft: 'clamp(0px, 10vw, 120px)' }}>
