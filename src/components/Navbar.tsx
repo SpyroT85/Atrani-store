@@ -20,32 +20,75 @@ const Navbar = () => {
   };
 
   return (
-  <nav className="relative grid grid-cols-3 items-center px-4 md:px-12 py-14 md:py-16 bg-background text-white" style={{ minHeight: '60px', fontFamily: '-apple-system, BlinkMacSystemFont' }}>
-    <div className="flex items-center" style={{ justifyContent: 'flex-start' }}>
-      <img 
-        src="/images/atrani.png?v=2" 
-        alt="Atrani Logo" 
-        className="filter invert" 
-        style={{ height: '28px', width: '96px', marginLeft: 'clamp(0px, 30vw, 380px)', objectFit: 'fill' }}
-        width="96"
-        height="28"
-      />
+  <nav className="relative px-4 md:px-12 py-14 md:py-16 bg-background text-white" style={{ minHeight: '60px', fontFamily: '-apple-system, BlinkMacSystemFont' }}>
+    {/* Mobile Layout */}
+    <div className="grid grid-cols-3 items-center md:hidden" style={{ paddingTop: '12px' }}>
+      {/* Hamburger left */}
+      <div className="flex items-center justify-start" style={{ marginLeft: '8px' }}>
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="flex justify-center items-center hover:text-[#A67C52] transition border border-white/20 rounded p-2"
+          aria-label="Toggle mobile menu"
+        >
+          <IoIosMenu className="w-8 h-8" />
+        </button>
+      </div>
+      {/* Logo center */}
+      <div className="flex items-center justify-center">
+        <img 
+          src="/images/atrani.webp?v=2" 
+          alt="Atrani Logo" 
+          className="filter invert" 
+          style={{ height: '28px', width: '96px', objectFit: 'fill' }}
+          width="96"
+          height="28"
+        />
+      </div>
+      {/* Cart right */}
+      <div className="flex justify-end" style={{ marginRight: '8px' }}>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="hover:text-[#A67C52] data-[state=open]:text-[#A67C52] transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none">
+            <BiShoppingBag className="w-6 h-6" />
+            <span className="text-xs">(0)</span>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" sideOffset={16} className="bg-background border border-white/10 text-white w-72 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', borderTop: '3px solid #A67C52', padding: '32px' }}>
+            <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
+            <div className="flex flex-col gap-4">
+              <div className="flex justify-between items-center">
+                <span className="font-bold text-xs">CART (0)</span>
+                <button className="text-xs hover:text-[#A67C52] cursor-pointer transition">REMOVE ALL</button>
+              </div>
+              <div className="text-center text-white/70 py-8 text-xs">
+                No Items
+              </div>
+              <div className="flex justify-between font-bold text-xs">
+                <span>TOTAL</span>
+                <span>$0.00</span>
+              </div>
+              <div className="px-4">
+                <Button variant="outline" className="w-full bg-[#A67C52] text-white hover:text-white py-5 rounded-md hover:bg-[#8a5e3a] transition text-sm font-bold border-none cursor-pointer">CHECKOUT</Button>
+              </div>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
-    
-    {/* Hamburger Menu Button (Mobile Only) */}
-    <button 
-      onClick={() => {
-        console.log('Menu toggled:', !isMobileMenuOpen);
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-      }}
-      className="md:hidden flex justify-center items-center hover:text-[#A67C52] transition border border-white/20 rounded p-2"
-      aria-label="Toggle mobile menu"
-    >
-      <IoIosMenu className="w-8 h-8" />
-    </button>
 
-    {/* Desktop Navigation */}
-    <div className="hidden md:flex justify-center gap-4 md:gap-12 uppercase font-bold tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(8px, 1vw, 11px)', marginLeft: 'clamp(0px, 10vw, 120px)' }}>
+    {/* Desktop Layout */}
+    <div className="hidden md:grid grid-cols-3 items-center" style={{ paddingTop: '12px' }}>
+      {/* Logo left */}
+      <div className="flex items-center" style={{ justifyContent: 'flex-start' }}>
+        <img 
+          src="/images/atrani.webp?v=2" 
+          alt="Atrani Logo" 
+          className="filter invert" 
+          style={{ height: '28px', width: '96px', marginLeft: 'clamp(0px, 32vw, 400px)', objectFit: 'fill', transform: 'translateX(52px)' }}
+          width="96"
+          height="28"
+        />
+      </div>
+      {/* Desktop Navigation center */}
+      <div className="flex justify-center gap-4 md:gap-12 uppercase font-bold tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(8px, 1vw, 11px)', marginLeft: 'clamp(0px, 10vw, 120px)' }}>
       <a href="#home" className="hover:text-[#A67C52] transition cursor-pointer">Home</a>
       <DropdownMenu>
         <DropdownMenuTrigger className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition outline-none bg-transparent border-none cursor-pointer" style={{ fontSize: '11px' }}>Watches</DropdownMenuTrigger>
@@ -98,6 +141,35 @@ const Navbar = () => {
         </DropdownMenuContent>
       </DropdownMenu>
       <a href="#contact" className="hover:text-[#A67C52] transition cursor-pointer" style={{ whiteSpace: 'nowrap', display: 'inline-block', position: 'relative', zIndex: 10 }}>Contact Us</a>
+      </div>
+      {/* Cart right */}
+      <div className="flex justify-end" style={{ marginRight: '300px' }}>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="hover:text-[#A67C52] data-[state=open]:text-[#A67C52] transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none">
+            <BiShoppingBag className="w-6 h-6" />
+            <span className="text-xs">(0)</span>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" sideOffset={16} alignOffset={-115} className="bg-background border border-white/10 text-white w-72 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', borderTop: '3px solid #A67C52', padding: '32px' }}>
+            <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
+            <div className="flex flex-col gap-4">
+              <div className="flex justify-between items-center">
+                <span className="font-bold text-xs">CART (0)</span>
+                <button className="text-xs hover:text-[#A67C52] cursor-pointer transition">REMOVE ALL</button>
+              </div>
+              <div className="text-center text-white/70 py-8 text-xs">
+                No Items
+              </div>
+              <div className="flex justify-between font-bold text-xs">
+                <span>TOTAL</span>
+                <span>$0.00</span>
+              </div>
+              <div className="px-4">
+                <Button variant="outline" className="w-full bg-[#A67C52] text-white hover:text-white py-5 rounded-md hover:bg-[#8a5e3a] transition text-sm font-bold border-none cursor-pointer">CHECKOUT</Button>
+              </div>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
 
     {/* Mobile Navigation Menu */}
@@ -178,34 +250,6 @@ const Navbar = () => {
         </div>
       </div>
     )}
-
-    <div className="flex justify-end" style={{ marginRight: '300px' }}>
-      <DropdownMenu>
-        <DropdownMenuTrigger className="hover:text-[#A67C52] data-[state=open]:text-[#A67C52] transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none">
-          <BiShoppingBag className="w-6 h-6" />
-          <span className="text-xs">(0)</span>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" sideOffset={16} alignOffset={-115} className="bg-background border border-white/10 text-white w-72 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', borderTop: '3px solid #A67C52', padding: '32px' }}>
-          <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
-          <div className="flex flex-col gap-4">
-            <div className="flex justify-between items-center">
-              <span className="font-bold text-xs">CART (0)</span>
-              <button className="text-xs hover:text-[#A67C52] cursor-pointer transition">REMOVE ALL</button>
-            </div>
-            <div className="text-center text-white/70 py-8 text-xs">
-              No Items
-            </div>
-            <div className="flex justify-between font-bold text-xs">
-              <span>TOTAL</span>
-              <span>$0.00</span>
-            </div>
-            <div className="px-4">
-              <Button variant="outline" className="w-full bg-[#A67C52] text-white hover:text-white py-5 rounded-md hover:bg-[#8a5e3a] transition text-sm font-bold border-none cursor-pointer">CHECKOUT</Button>
-            </div>
-          </div>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
   </nav>
   );
 };
