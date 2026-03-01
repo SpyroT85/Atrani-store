@@ -7,9 +7,9 @@ const FeaturedProducts = () => {
         <div className="flex flex-col gap-12">
         {/* ZX9 Style - Large Featured */}
         <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', padding: '0 16px' }}>
-          <div className="featured-zx9-box rounded-xl overflow-hidden flex flex-col md:flex-row items-center p-12 md:p-16 relative" style={{ background: '#BFA57A' }}>
-          <div className="md:w-1/2 flex flex-col justify-center md:items-start items-center text-left" style={{ zIndex: 3, marginLeft: '60px' }}>
-            <h2 className="text-white font-bold mb-6" style={{ fontSize: '56px', lineHeight: '1.1' }}>
+          <div className="featured-zx9-box rounded-xl overflow-hidden flex flex-col md:flex-row items-center p-6 sm:p-12 md:p-16 relative" style={{ background: '#BFA57A' }}>
+          <div className="md:w-1/2 flex flex-col justify-center md:items-start items-center text-left" style={{ zIndex: 3, marginLeft: 'clamp(0px, 6vw, 60px)' }}>
+            <h2 className="text-white font-bold mb-6" style={{ fontSize: 'clamp(32px, 6vw, 56px)', lineHeight: '1.1' }}>
               HERITAGE<br />DIVER
               </h2>
               <p className="text-white/90 mb-10 max-w-md" style={{ fontSize: '16px', fontWeight: 400 }}>
@@ -43,14 +43,14 @@ const FeaturedProducts = () => {
 
         {/* ZX7 Style - Image Background */}
         <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', padding: '0 16px' }}>
-          <div className="rounded-xl overflow-hidden p-12 md:p-16 min-h-80 flex items-center relative" style={{ background: '#E8E8E8' }}>
+          <div className="rounded-xl overflow-hidden p-6 sm:p-12 md:p-16 min-h-80 flex flex-col md:flex-row items-center relative gap-4 md:gap-0" style={{ background: '#E8E8E8' }}>
             <img 
               src="/images/pen1.png" 
               alt="Vintage Fountain Pen" 
-              className="relative w-full h-full object-contain rounded-xl" 
-              style={{ maxWidth: '40%', marginLeft: '5%', marginRight: '15%' }}
+              className="relative w-full md:w-auto h-auto md:h-full object-contain rounded-xl" 
+              style={{ maxWidth: 'clamp(200px, 50%, 40%)', marginLeft: '0', marginRight: '0', marginBottom: '1rem' }}
             />
-            <div className="relative z-10" style={{ marginLeft: '20px' }}>
+            <div className="relative z-10" style={{ marginLeft: 'clamp(0px, 2vw, 20px)' }}>
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-black">VINTAGE FOUNTAIN PEN</h2>
               <p className="text-black mb-6 max-w-xs" style={{ fontSize: '16px', fontWeight: 400, wordWrap: 'break-word' }}>
                 This vintage fountain pen is a timeless writing instrument, crafted with precision and elegance to provide a smooth and luxurious writing experience.
@@ -62,9 +62,9 @@ const FeaturedProducts = () => {
           </div>
         </div>
         <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', padding: '0 16px' }}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="rounded-xl overflow-hidden p-12 md:p-16 flex items-center" style={{ background: '#BFA57A' }}>
-              <div style={{ marginLeft: '50px' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div className="rounded-xl overflow-hidden p-6 sm:p-12 md:p-16 flex items-center" style={{ background: '#BFA57A' }}>
+              <div style={{ marginLeft: 'clamp(0px, 5vw, 50px)' }}>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">BRASS NAVIGATOR COMPASS</h2>
                 <p className="text-white/90 mb-8 max-w-xs" style={{ fontSize: '15px', fontWeight: 400 }}>A beautifully crafted vintage brass compass, built for the modern explorer. Precision engineering meets timeless design in this stunning collector's piece.</p>
                 <Button variant="outline" className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
@@ -83,7 +83,7 @@ const FeaturedProducts = () => {
         </div>
         {/* About Style - Image + Text */}
         <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', padding: '0 16px' }}>
-          <div className="rounded-xl overflow-hidden flex flex-col md:flex-row items-center gap-12 p-12 md:p-16" style={{ background: '#FFFFFF' }}>
+          <div className="rounded-xl overflow-hidden flex flex-col md:flex-row items-center gap-6 md:gap-12 p-6 sm:p-12 md:p-16" style={{ background: '#FFFFFF' }}>
             <div className="md:w-1/2">
               <div className="w-full h-96 bg-card rounded-xl overflow-hidden">
                 <img
@@ -94,7 +94,7 @@ const FeaturedProducts = () => {
               </div>
             </div>
             <div className="md:w-1/2">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-black">
                 The Art of <span style={{ color: '#BFA57A' }}>Ink</span> & Writing
               </h2>
               <p className="leading-relaxed" style={{ color: '#7D7D7D' }}>

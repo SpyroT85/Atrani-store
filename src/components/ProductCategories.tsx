@@ -9,10 +9,10 @@ const ProductCategories = () => {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-12 md:py-24 bg-white">
       <div className="w-full flex justify-center">
         <div className="px-4" style={{ maxWidth: '1300px', width: '100%' }}>
-          <div className="grid grid-cols-1 md:grid-cols-4" style={{ gap: '32px' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4" style={{ gap: '32px' }}>
             {categories.map((category) => (
               <CategoryCard 
                 key={category.title} 

@@ -7,11 +7,11 @@ const Hero = () => {
       style={{ padding: '8rem 0', minHeight: '90vh', borderTop: 'none', borderLeft: '1px solid rgba(255, 255, 255, 0.1)', borderRight: '1px solid rgba(255, 255, 255, 0.1)' }}
     >
       <div 
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-4 md:px-32 items-center"
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 px-4 md:px-32 items-center"
         style={{ alignItems: 'flex-start' }}
       >
         <div className="flex items-start justify-center md:justify-start">
-          <div className="md:pr-32" style={{ marginTop: '-2rem' }}>
+          <div className="md:pr-32" style={{ marginTop: 'clamp(-1rem, -2vw, -2rem)' }}>
             <span className="uppercase tracking-[0.5em] text-xs" style={{ color: '#A67C52', marginLeft: '0.35rem' }}>Featured Timepiece</span>
             <h1 className="text-4xl md:text-6xl font-bold mt-4 mb-2 leading-tight tracking-wide text-white">
               OLD TOWN<br/>POCKET WATCH
@@ -34,8 +34,8 @@ const Hero = () => {
           <img 
             src="/images/main-image.png" 
             alt="Old Town Pocket Watch" 
-            className="w-80 h-80 md:w-130 md:h-130 object-contain" 
-            style={{ marginLeft: '-5rem' }}
+            className="w-64 sm:w-80 md:w-130 h-64 sm:h-80 md:h-130 object-contain" 
+            style={{ marginLeft: 'clamp(-1rem, -5vw, -5rem)' }}
           />
         </div>
       </div>
