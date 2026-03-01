@@ -1,24 +1,26 @@
 import { products } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
 
 const Casual = () => {
   return (
-    <>
-      <Navbar />
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-8">Casual</h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <Layout>
+      <section className="py-24 px-4 bg-white flex justify-center">
+        <div className="max-w-5xl w-full">
+          <div style={{ height: '3rem' }}></div>
+          <h1 className="text-4xl md:text-5xl font-bold text-black text-center" style={{ marginBottom: '3rem' }}>Casual</h1>
+          <div className="flex flex-col w-full">
             {products.casual.map((product, index) => (
-              <ProductCard key={index} {...product} />
+              <div key={product.name} className={`flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'} w-full`}>
+                <ProductCard {...product} reverse={index % 2 !== 0} />
+                {index < products.casual.length - 1 && <div className="h-24 md:h-32"></div>}
+              </div>
             ))}
           </div>
+          <div className="h-6 md:h-8"></div>
         </div>
       </section>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 
