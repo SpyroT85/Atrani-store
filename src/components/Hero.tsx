@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -24,14 +25,16 @@ const Hero = () => {
             </p>
             {/* Desktop button (under text, left column) */}
             <div className="hidden md:flex justify-center md:justify-start">
-              <Button 
-                variant="outline"
-                className="bg-[#A67C52] text-white hover:text-white uppercase tracking-widest text-sm font-bold hover:bg-[#8a5e3a] transition border-none cursor-pointer rounded-md"
-                style={{ paddingLeft: '4rem', paddingRight: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}
-                aria-label="View product details"
-              >
-                See Details
-              </Button>
+              <Link to="/watches/pocket">
+                <Button 
+                  variant="outline"
+                  className="bg-[#A67C52] text-white hover:text-white uppercase tracking-widest text-sm font-bold hover:bg-[#8a5e3a] transition border-none cursor-pointer rounded-md"
+                  style={{ paddingLeft: '4rem', paddingRight: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}
+                  aria-label="View product details"
+                >
+                  SEE PRODUCT
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -46,14 +49,16 @@ const Hero = () => {
           />
           {/* Mobile button (under image) */}
           <div className="flex md:hidden justify-center" style={{ marginTop: '3.5rem' }}>
-            <Button 
-              variant="outline"
-              className="bg-[#A67C52] text-white hover:text-white uppercase tracking-widest text-sm font-bold hover:bg-[#8a5e3a] transition border-none cursor-pointer rounded-md"
-              style={{ paddingLeft: '4rem', paddingRight: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem' }}
-              aria-label="View product details"
-            >
-              See Details
-            </Button>
+            <Link to="/watches/pocket">
+              <Button 
+                variant="outline"
+                className="bg-[#A67C52] text-white hover:text-white uppercase tracking-widest text-sm font-bold hover:bg-[#8a5e3a] transition border-none cursor-pointer rounded-md"
+                style={{ paddingLeft: '4rem', paddingRight: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem' }}
+                aria-label="View product details"
+              >
+                See Details
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

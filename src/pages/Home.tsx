@@ -1,18 +1,37 @@
 import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import ProductCategories from '../components/ProductCategories';
-import FeaturedProducts from '../components/FeaturedProducts';
-import About from '../components/About';
+import MotionSection from '../components/MotionSection';
+import { Suspense, lazy } from 'react';
+
+const Hero = lazy(() => import('../components/Hero'));
+const ProductCategories = lazy(() => import('../components/ProductCategories'));
+const FeaturedProducts = lazy(() => import('../components/FeaturedProducts'));
+const About = lazy(() => import('../components/About'));
 
 const Home = () => {
   return (
     <Layout>
-      <Hero />
-      <ProductCategories />
+      <Suspense fallback={<div style={{height: '300px'}}></div>}>
+        <MotionSection direction="left">
+          <Hero />
+        </MotionSection>
+      </Suspense>
+      <Suspense fallback={<div style={{height: '200px'}}></div>}>
+        <MotionSection direction="right">
+          <ProductCategories />
+        </MotionSection>
+      </Suspense>
       <div className="h-16 md:h-24"></div>
-      <FeaturedProducts />
+      <Suspense fallback={<div style={{height: '200px'}}></div>}>
+        <MotionSection direction="left">
+          <FeaturedProducts />
+        </MotionSection>
+      </Suspense>
       <div className="h-16 md:h-24"></div>
-      <About />
+      <Suspense fallback={<div style={{height: '200px'}}></div>}>
+        <MotionSection direction="right">
+          <About />
+        </MotionSection>
+      </Suspense>
     </Layout>
   );
 };

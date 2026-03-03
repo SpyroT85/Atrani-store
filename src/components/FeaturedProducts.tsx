@@ -1,4 +1,6 @@
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'instant' });
 
 const FeaturedProducts = () => {
   return (
@@ -16,9 +18,11 @@ const FeaturedProducts = () => {
                 A timeless classic featuring exquisite two-tone craftsmanship. This vintage-inspired timepiece embodies the golden age of horology with modern precision and enduring elegance.
               </p>
               <div className="flex justify-center md:justify-start">
-                <Button variant="outline" className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
-                  See Details
-                </Button>
+                <Link to="/watches/luxury" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
+                  <Button variant="outline" className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md w-full" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
+                    See Details
+                  </Button>
+                </Link>
               </div>
           </div>
             <div className="md:w-1/2 flex justify-center items-center mb-8 md:mb-0 relative" style={{ minHeight: '300px' }}>
@@ -85,9 +89,11 @@ const FeaturedProducts = () => {
                 loading="lazy"
               />
               <div className="flex justify-center md:justify-start">
+                <Link to="/inkwells" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
                 <Button variant="outline" className="border-2 border-black text-black bg-transparent hover:bg-black hover:text-white uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem' }}>
                   See Details
                 </Button>
+                </Link>
               </div>
             </div>
             {/* Desktop image: left column only on md+ */}
@@ -126,9 +132,11 @@ const FeaturedProducts = () => {
                   A beautifully crafted vintage brass compass, built for the modern explorer. Precision engineering meets timeless design in this stunning collector's piece.
                 </p>
                 <div className="flex justify-center md:justify-start w-full">
+                  <Link to="/compasses" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
                   <Button variant="outline" className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
                     See Details
                   </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -156,9 +164,11 @@ const FeaturedProducts = () => {
               <p className="leading-relaxed" style={{ color: '#7D7D7D' }}>
                 Discover our curated collection of vintage inkwells, each a masterpiece of glass and metal craftsmanship. From elegant crystal designs to ornate brass pieces, our inkwells bring timeless sophistication to any writing desk and make for stunning collector's items.
               </p>
-              <Button variant="outline" className="bg-[#BFA57A] text-white hover:text-white uppercase tracking-widest text-sm font-bold hover:bg-[#8a5e3a] transition border-none cursor-pointer rounded-md" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
-                See Details
-              </Button>
+              <Link to="/inkwells" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
+                <Button variant="outline" className="bg-[#BFA57A] text-white hover:text-white uppercase tracking-widest text-sm font-bold hover:bg-[#8a5e3a] transition border-none cursor-pointer rounded-md w-full" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
+                  See Details
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

@@ -34,15 +34,17 @@ const Navbar = () => {
         </button>
       </div>
       {/* Logo center */}
-      <div className="flex items-center justify-center">
-        <img 
-          src="/images/atrani.webp?v=2" 
-          alt="Atrani Logo" 
-          className="filter invert" 
-          style={{ height: '28px', width: '96px', objectFit: 'fill' }}
-          width="96"
-          height="28"
-        />
+      <div className="flex items-center justify-center" style={{ position: 'relative', zIndex: 20 }}>
+          <Link to="/" style={{ zIndex: 21, display: 'inline-block' }}>
+            <img 
+              src="/images/atrani.webp?v=2" 
+              alt="Atrani Logo" 
+              className="filter invert cursor-pointer" 
+              style={{ height: '28px', width: '96px', objectFit: 'fill', zIndex: 22 }}
+              width="96"
+              height="28"
+            />
+          </Link>
       </div>
       {/* Cart right */}
       <div className="flex justify-end" style={{ marginRight: '8px' }}>
@@ -73,36 +75,36 @@ const Navbar = () => {
         </DropdownMenu>
       </div>
     </div>
-
-    {/* Desktop Layout */}
+     {/* Mobile Menu */} 
     <div className="hidden md:grid grid-cols-3 items-center" style={{ paddingTop: '12px' }}>
-      {/* Logo left */}
       <div className="flex items-center" style={{ justifyContent: 'flex-start' }}>
-            <img 
-              src="/images/atrani.webp?v=2" 
-              alt="Atrani Logo" 
-              className="filter invert" 
-              style={{ height: '28px', width: '96px', marginLeft: 'clamp(100px, 23vw, 500px)', objectFit: 'fill' }}
-              width="96"
-              height="28"
-            />
+            <Link to="/">
+              <img 
+                src="/images/atrani.webp?v=2" 
+                alt="Atrani Logo" 
+                className="filter invert cursor-pointer" 
+                style={{ height: '28px', width: '96px', marginLeft: 'clamp(100px, 23vw, 500px)', objectFit: 'fill' }}
+                width="96"
+                height="28"
+              />
+            </Link>
       </div>
       {/* Desktop Navigation center */}
       <div className="flex justify-center gap-4 md:gap-12 uppercase font-bold tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(8px, 1vw, 11px)', marginLeft: 'clamp(0px, 10vw, 120px)' }}>
-      <a href="#home" className="hover:text-[#A67C52] transition cursor-pointer">Home</a>
+      <Link to="/" className="hover:text-[#A67C52] transition cursor-pointer">Home</Link>
       <DropdownMenu>
         <DropdownMenuTrigger className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition outline-none bg-transparent border-none cursor-pointer" style={{ fontSize: '11px' }}>Watches</DropdownMenuTrigger>
         <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 px-6 py-6 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', padding: '8px', borderTop: '3px solid #A67C52' }}>
           <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Link to="/luxury" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Luxury</Link>
+              <Link to="/watches/luxury" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Luxury</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link to="/casual" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Casual</Link>
+              <Link to="/watches/smartwatches" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Smartwatches</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link to="/pocket" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Pocket</Link>
+              <Link to="/watches/pocket" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Pocket</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
@@ -112,34 +114,21 @@ const Navbar = () => {
         <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 px-6 py-6 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', padding: '8px', borderTop: '3px solid #A67C52' }}>
           <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
           <DropdownMenuGroup>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Quill Pens</DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Steel Nib Pens</DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Fountain Pens</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link to="/pens/quill" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>
+                Quill Pens
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link to="/pens/fountain" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>
+                Fountain Pens
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DropdownMenu>
-        <DropdownMenuTrigger className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition outline-none bg-transparent border-none cursor-pointer" style={{ fontSize: '11px' }}>Inkwells</DropdownMenuTrigger>
-        <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 px-6 py-6 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', padding: '8px', borderTop: '3px solid #A67C52' }}>
-          <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
-          <DropdownMenuGroup>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Crystal Inkwells</DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Brass Inkwells</DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Traveling Inkwells</DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <DropdownMenu>
-        <DropdownMenuTrigger className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition outline-none bg-transparent border-none cursor-pointer" style={{ fontSize: '11px', whiteSpace: 'nowrap' }}>Compasses</DropdownMenuTrigger>
-        <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 px-6 py-6 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', padding: '8px', borderTop: '3px solid #A67C52' }}>
-          <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
-          <DropdownMenuGroup>
-            <DropdownMenuItem className="hover:bg-[#BFA57A]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Brass Compasses</DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Pocket Compasses</DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-[#BFA57A]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Nautical Compasses</DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Link to="/compasses" className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition cursor-pointer" style={{ fontSize: '11px', display: 'inline-block', whiteSpace: 'nowrap', marginRight: '6px' }}>Compasses</Link>
+      <Link to="/inkwells" className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition cursor-pointer" style={{ fontSize: '11px', display: 'inline-block' }}>Inkwells</Link>
       <a href="#contact" className="hover:text-[#A67C52] transition cursor-pointer" style={{ whiteSpace: 'nowrap', display: 'inline-block', position: 'relative', zIndex: 10 }}>Contact Us</a>
       </div>
       {/* Cart right */}
@@ -176,7 +165,7 @@ const Navbar = () => {
     {isMobileMenuOpen && (
       <div className="md:hidden absolute top-full left-0 right-0 bg-[#1a1a1a] border-t border-[#A67C52] z-100 shadow-xl">
         <div className="flex flex-col uppercase font-bold tracking-wider text-sm text-center" style={{ paddingTop: '16px', paddingBottom: '16px', paddingLeft: '24px', paddingRight: '24px' }}>
-          <a href="#home" className="hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }} onClick={() => setIsMobileMenuOpen(false)}>Home</a>
+          <Link to="/" className="hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }} onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
           
           <div>
             <button 
@@ -188,9 +177,9 @@ const Navbar = () => {
             </button>
             {expandedSection === 'watches' && (
               <div className="flex flex-col gap-4 pb-4 text-xs">
-                <Link to="/luxury" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Luxury</Link>
-                <Link to="/casual" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Casual</Link>
-                <Link to="/pocket" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Pocket</Link>
+                <Link to="/watches/luxury" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Luxury</Link>
+                <Link to="/watches/smartwatches" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Smartwatches</Link>
+                <Link to="/watches/pocket" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Pocket</Link>
               </div>
             )}
           </div>
@@ -205,9 +194,9 @@ const Navbar = () => {
             </button>
             {expandedSection === 'pens' && (
               <div className="flex flex-col gap-4 pb-4 text-xs">
-                <a href="#quill" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Quill Pens</a>
+                <Link to="/pens/quill" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Quill Pens</Link>
                 <a href="#steel" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Steel Nib Pens</a>
-                <a href="#fountain" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Fountain Pens</a>
+                <Link to="/pens/fountain" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Fountain Pens</Link>
               </div>
             )}
           </div>
