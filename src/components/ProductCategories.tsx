@@ -9,7 +9,7 @@ const ProductCategories = () => {
   ];
 
   return (
-    <section className="py-12 md:py-24 bg-white">
+    <section className="py-12 md:py-24" style={{ background: '#F1F1F1' }}>
       <div className="w-full flex justify-center">
         <div className="px-4" style={{ maxWidth: '1300px', width: '100%' }}>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-items-center" style={{ gap: '32px' }}>

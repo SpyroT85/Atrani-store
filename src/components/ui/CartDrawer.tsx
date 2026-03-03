@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
-import { IoClose } from 'react-icons/io5';
+import { IoClose, IoCartOutline } from 'react-icons/io5';
 
 export interface CartItem {
   id: string;
@@ -101,8 +101,8 @@ export default function CartDrawer({
         <div style={{ flex: 1, overflowY: 'auto', padding: '8px 0' }}>
           {items.length === 0 ? (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#aaa', gap: '12px' }}>
-              <span style={{ fontSize: '40px' }}>🛒</span>
-              <p style={{ fontSize: '13px', margin: 0 }}>Your cart is empty</p>
+              <IoCartOutline style={{ fontSize: '64px' }} />
+              <p style={{ fontSize: '14px', margin: 0, fontWeight: 'bold' }}>Your cart is empty</p>
             </div>
           ) : (
             items.map((item) => (

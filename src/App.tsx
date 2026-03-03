@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import { Routes, Route } from 'react-router-dom';
@@ -12,26 +12,29 @@ import BackToTop from './BackToTop';
 import Compasses from './pages/Compasses/Compasses';
 import Inkwells from './pages/Inkwells/Inkwells';
 import Checkout from './pages/Checkout';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <BackToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/watches" element={<Watches />} />
-        <Route path="/watches/luxury" element={<Luxury />} />
-        <Route path="/watches/smartwatches" element={<Smartwatches />} />
-        <Route path="/watches/pocket" element={<Pocket />} />
-        <Route path="/pens/quill" element={<QuillPens />} />
-        <Route path="/pens/fountain" element={<FountainPens />} />
-        <Route path="/compasses" element={<Compasses />} />
-        <Route path="/inkwells" element={<Inkwells />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <CartProvider>
+      <div style={{ position: 'relative', minHeight: '100vh', background: '#F1F1F1' }}>
+        <BackToTop />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/watches" element={<Watches />} />
+          <Route path="/watches/luxury" element={<Luxury />} />
+          <Route path="/watches/smartwatches" element={<Smartwatches />} />
+          <Route path="/watches/pocket" element={<Pocket />} />
+          <Route path="/pens/quill" element={<QuillPens />} />
+          <Route path="/pens/fountain" element={<FountainPens />} />
+          <Route path="/compasses" element={<Compasses />} />
+          <Route path="/inkwells" element={<Inkwells />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </CartProvider>
   );
 }
 

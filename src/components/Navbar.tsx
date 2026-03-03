@@ -6,10 +6,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BiShoppingBag } from "react-icons/bi";
+import { IoBagHandleSharp } from "react-icons/io5";
 import { IoIosMenu } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import CartDrawer, { type CartItem } from './ui/CartDrawer';
+import CartDrawer from './ui/CartDrawer';
+import { useCart } from '../context/CartContext';
 
 // Additional imports can go here
 
@@ -17,29 +18,13 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    // Mock items — αντικατέστησε με πραγματικό cart state αργότερα
-    { id: '1', name: 'Heritage Watch', price: 249.90, qty: 1 },
-    { id: '2', name: 'Pocket Classic', price: 99.90, qty: 2 },
-  ]);
+  const { items, updateQty, removeItem, removeAll } = useCart();
 
   const toggleSection = (section: string) => {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
-  const handleUpdateQty = (id: string, qty: number) => {
-    setCartItems(prev => prev.map(item => item.id === id ? { ...item, qty } : item));
-  };
-
-  const handleRemoveItem = (id: string) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
-  };
-
-  const handleRemoveAll = () => {
-    setCartItems([]);
-  };
-
-  const totalItems = cartItems.reduce((acc, item) => acc + item.qty, 0);
+  const totalItems = items.reduce((acc, item) => acc + item.qty, 0);
 
   return (
     <>
@@ -73,8 +58,8 @@ const Navbar = () => {
               onClick={() => setCartOpen(true)}
               className="hover:text-[#A67C52] transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none"
             >
-              <BiShoppingBag className="w-6 h-6" />
-              <span className="text-xs">({totalItems})</span>
+              <IoBagHandleSharp className="w-7 h-7" />
+              <span className="text-base">({totalItems})</span>
             </button>
           </div>
         </div>
@@ -139,8 +124,8 @@ const Navbar = () => {
               onClick={() => setCartOpen(true)}
               className="hover:text-[#A67C52] transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none relative"
             >
-              <BiShoppingBag className="w-6 h-6" />
-              <span className="text-xs">({totalItems})</span>
+              <IoBagHandleSharp className="w-7 h-7" />
+              <span className="text-base">({totalItems})</span>
               {/* Badge */}
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 bg-[#A67C52] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold" style={{ fontSize: '9px' }}>
@@ -206,16 +191,14 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-
-      {/* Cart Drawer — εκτός nav, render στο root level */}
-      <CartDrawer
-        isOpen={cartOpen}
-        onClose={() => setCartOpen(false)}
-        items={cartItems}
-        onRemoveAll={handleRemoveAll}
-        onUpdateQty={handleUpdateQty}
-        onRemoveItem={handleRemoveItem}
-      />
+       <CartDrawer
+         isOpen={cartOpen}
+         onClose={() => setCartOpen(false)}
+         items={items}
+         onRemoveAll={removeAll}
+         onUpdateQty={updateQty}
+         onRemoveItem={removeItem}
+       />
     </>
   );
 };

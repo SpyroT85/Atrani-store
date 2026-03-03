@@ -4,7 +4,7 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'instant' });
 
 const FeaturedProducts = () => {
   return (
-    <section className="py-16" style={{ background: '#FFFFFF' }}>
+    <section className="py-16" style={{ background: '#F1F1F1' }}>
       <div>
         <div className="flex flex-col gap-12">
         {/* ZX9 Style - Large Featured */}
@@ -142,7 +142,7 @@ const FeaturedProducts = () => {
         </div>
         {/* About Style - Image + Text */}
         <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', padding: '0 16px' }}>
-          <div className="rounded-xl overflow-hidden flex flex-col md:flex-row items-center gap-6 md:gap-12 p-6 sm:p-12 md:p-16" style={{ background: '#FFFFFF' }}>
+          <div className="rounded-xl overflow-hidden flex flex-col md:flex-row items-center gap-6 md:gap-12 p-6 sm:p-12 md:p-16" style={{ background: '#F1F1F1' }}>
             <div className="md:w-1/2">
               <div className="w-full h-96 bg-card rounded-xl overflow-hidden">
                 <img

@@ -17,53 +17,71 @@ const Pocket = () => {
 
       <div className="flex flex-col w-full gap-20">
         {products['watches/pocket'].map((product, index) => (
-          <MotionSection direction={index % 2 === 0 ? "left" : "right"} key={product.name}>
-            <div className="w-full flex justify-center">
-              <div
-                className={`grid grid-cols-1 md:grid-cols-2 items-center ${index === 0 ? 'md:gap-x-160' : 'md:gap-x-24'} gap-12 max-w-6xl w-full ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}
-                style={{ minHeight: '520px' }}
-              >
-                {index % 2 === 1 ? (
-                  <>
-                    <div className={`flex flex-col items-start px-4 md:px-12 justify-self-start`}>
-                      <p className="text-accent font-semibold uppercase tracking-[0.5em] text-base mb-6" style={{ marginLeft: '0.5rem' }}>
-                        {product.code}
-                      </p>
-                      <h2 className="text-black font-bold mb-8 text-left" style={{ fontSize: 'clamp(40px, 7vw, 64px)', lineHeight: '1.1', textAlign: 'left' }}>{product.name}</h2>
-                      <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4" style={{ marginTop: '1.5rem' }}>
-                        {product.description}
-                      </p>
-                      <div className="mb-6"></div>
-                      <p className="text-black text-lg font-bold mb-10">{product.price}</p>
-                      <CartButton />
-                      <div className="w-full flex items-center gap-6 justify-start">
+            <MotionSection direction={index % 2 === 0 ? "left" : "right"} key={product.name}>
+              <div className="w-full flex justify-center">
+                <div
+                  className={`grid grid-cols-1 md:grid-cols-2 items-center ${index === 0 ? 'md:gap-x-24' : 'md:gap-x-24'} gap-12 max-w-6xl w-full ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}
+                  style={{ minHeight: '520px' }}
+                >
+                  {index % 2 === 1 ? (
+                    <>
+                      <div className={`flex flex-col items-start px-4 md:px-12 justify-self-start`}>
+                        <p className="text-accent font-semibold uppercase tracking-[0.5em] text-base mb-6" style={{ marginLeft: '0.5rem' }}>
+                          {product.code}
+                        </p>
+                        <h2 className="text-black font-bold mb-8 text-left" style={{ fontSize: 'clamp(40px, 7vw, 64px)', lineHeight: '1.1', textAlign: 'left' }}>{product.name}</h2>
+                        <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4" style={{ marginTop: '1.5rem', whiteSpace: 'normal' }}>
+                          {product.description}
+                        </p>
+                        <div className="mb-6"></div>
+                        <div style={{ height: '16px' }}></div>
+                        <p className="text-black text-lg font-bold mb-2">Price: {product.price}€</p>
+                        <div style={{ height: '16px' }}></div>
+                        <CartButton 
+                          productId={product.id}
+                          productName={product.name}
+                          productPrice={product.price}
+                          productImage={product.image}
+                        />
+                        <div className="w-full flex items-center gap-6 justify-start">
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center justify-center rounded-2xl overflow-hidden bg-gray-50 shadow-lg" style={{ width: '520px', height: '520px' }}>
-                      <img src={product.image} alt={product.name} className="object-cover w-full h-full" width="520" height="520" loading="lazy" />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="flex items-center justify-start rounded-2xl overflow-hidden bg-gray-50 shadow-lg md:-ml-55" style={{ width: '520px', height: '520px' }}>
-                      <img src={product.image} alt={product.name} className="object-cover w-full h-full" width="520" height="520" loading="lazy" />
-                    </div>
-                    <div className={`flex flex-col items-start px-4 md:px-12 justify-self-end ${index === 0 ? 'md:-translate-x-38' : ''}`}>
-                      <p className="text-accent font-semibold uppercase tracking-[0.5em] text-base mb-6" style={{ marginLeft: '0.5rem' }}>
-                        {product.code}
-                      </p>
-                      <h2 className="text-black font-bold mb-8 text-left" style={{ fontSize: 'clamp(40px, 7vw, 64px)', lineHeight: '1.1', textAlign: 'left' }}>{product.name}</h2>
-                      <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-10" style={{ marginTop: '1.5rem' }}>
-                        {product.description}
-                      </p>
-                      <div className="w-full flex items-center gap-6 justify-start">
+                      <div className="flex items-center justify-center rounded-2xl overflow-hidden bg-gray-50 shadow-lg" style={{ width: '520px', height: '520px' }}>
+                        <img src={product.image} alt={product.name} className="object-cover w-full h-full" width="520" height="520" loading="lazy" />
                       </div>
-                    </div>
-                  </>
-                )}
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-start rounded-2xl overflow-hidden bg-gray-50 shadow-lg md:-ml-55" style={{ width: '520px', height: '520px' }}>
+                        <img src={product.image} alt={product.name} className="object-cover w-full h-full" width="520" height="520" loading="lazy" />
+                      </div>
+                      {/* Pocket Silver (index 0): move info slightly to the right */}
+                      <div className={`flex flex-col items-start px-4 md:px-12 justify-self-end ${index === 0 ? 'md:translate-x-12' : ''}`}>
+                        <p className="text-accent font-semibold uppercase tracking-[0.5em] text-base mb-6" style={{ marginLeft: '0.5rem' }}>
+                          {product.code}
+                        </p>
+                        <h2 className="text-black font-bold mb-8 text-left" style={{ fontSize: 'clamp(40px, 7vw, 64px)', lineHeight: '1.1', textAlign: 'left' }}>{product.name}</h2>
+                        <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4" style={{ marginTop: '1.5rem', whiteSpace: 'normal' }}>
+                          {product.description}
+                        </p>
+                        <div className="mb-6"></div>
+                        <div style={{ height: '16px' }}></div>
+                        <p className="text-black text-lg font-bold mb-2">Price: {product.price}€</p>
+                        <div style={{ height: '16px' }}></div>
+                        <CartButton 
+                          productId={product.id}
+                          productName={product.name}
+                          productPrice={product.price}
+                          productImage={product.image}
+                        />
+                        <div className="w-full flex items-center gap-6 justify-start">
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          </MotionSection>
+            </MotionSection>
         ))}
       </div>
       <div className="h-24 md:h-14"></div>

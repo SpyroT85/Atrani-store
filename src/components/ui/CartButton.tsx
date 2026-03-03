@@ -1,75 +1,100 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { HiShoppingCart } from "react-icons/hi2";
 import { Button } from './button';
+import { useCart } from '../../context/CartContext';
 
 interface CartButtonProps {
-  onAddToCart?: (quantity: number) => void;
-  initialQuantity?: number;
+  productId: string;
+  productName: string;
+  productPrice: number;
+  productImage?: string;
   className?: string;
 }
 
-const CartButton: React.FC<CartButtonProps> = ({ onAddToCart, initialQuantity = 0, className }) => {
-  const [quantity, setQuantity] = useState(initialQuantity);
+const CartButton: React.FC<CartButtonProps> = ({ productId, productName, productPrice, productImage, className }) => {
+  const { addItem, removeItem, items } = useCart();
+  const currentQty = items.find(i => i.id === productId)?.qty ?? 0;
 
-  const handleAddToCart = () => {
-    setQuantity(1);
-    if (onAddToCart) onAddToCart(1);
+  const handleAdd = () => {
+    addItem({ id: productId, name: productName, price: productPrice, image: productImage });
   };
-
-  const handleIncrease = () => {
-    setQuantity(q => {
-      const newQ = q + 1;
-      if (onAddToCart) onAddToCart(newQ);
-      return newQ;
-    });
-  };
-
-  const handleDecrease = () => {
-    setQuantity(q => {
-      const newQ = q > 1 ? q - 1 : 0;
-      if (onAddToCart) onAddToCart(newQ);
-      return newQ;
-    });
+  const handleRemove = () => {
+    removeItem(productId);
   };
 
   const buttonStyles = "bg-[#b89e6f] text-white uppercase tracking-widest text-sm font-bold transition border-none cursor-pointer rounded-md flex items-center justify-center w-full";
-  const buttonPadding = { padding: '2rem 2rem', minWidth: '200px' };
+  const buttonPadding = { padding: '2rem 2rem', minWidth: '210px' };
 
-  return (
-    <div className={className}>
-      <Button
-        variant="default"
-        className={buttonStyles}
-        style={buttonPadding}
-        aria-label="Cart button"
-        onClick={quantity === 0 ? handleAddToCart : undefined}
-      >
-        {quantity === 0 ? (
-          <span className="flex items-center">
-            <HiShoppingCart aria-label="cart" size={24} style={{ marginRight: '0.5rem' }} />
+  const handleDecrease = () => {
+    if (currentQty > 0) {
+      removeItem(productId);
+    }
+  };
+
+  const handleIncrease = () => {
+    addItem({ id: productId, name: productName, price: productPrice, image: productImage });
+  };
+
+  if (currentQty === 0) {
+    return (
+      <div className={className} style={{ width: '210px', display: 'inline-block' }}>
+        <Button variant="default" className={buttonStyles} style={buttonPadding} onClick={handleAdd}>
+          <span className="flex items-center gap-2" style={{ width: '100%', justifyContent: 'center', display: 'inline-flex' }}>
+            <HiShoppingCart size={24} />
             Add to Cart
           </span>
-        ) : (
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              className="w-8 h-8 flex items-center justify-center bg-[#b89e6f] rounded-md text-white font-bold border-none hover:bg-[#a88c5c] transition cursor-pointer"
-              aria-label="Decrease quantity"
-              onClick={handleDecrease}
-            >
-              -
-            </button>
-            <span className="mx-4 text-center text-lg font-bold" style={{ minWidth: '2rem' }}>{quantity}</span>
-            <button
-              type="button"
-              className="w-8 h-8 flex items-center justify-center bg-[#b89e6f] rounded-md text-white font-bold border-none hover:bg-[#a88c5c] transition cursor-pointer"
-              aria-label="Increase quantity"
-              onClick={handleIncrease}
-            >
-              +
-            </button>
-          </div>
-        )}
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className={className} style={{ width: '210px', display: 'inline-block' }}>
+      <Button variant="default" className={buttonStyles} style={buttonPadding}>
+        <span className="flex items-center gap-2" style={{ width: '100%', justifyContent: 'center', display: 'inline-flex' }}>
+          <button
+            onClick={handleDecrease}
+            aria-label="Decrease quantity"
+            style={{
+              width: '32px', height: '32px',
+              backgroundColor: '#b89e6f',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '6px',
+              fontSize: '20px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
+            }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#a68b5b')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#b89e6f')}
+          >
+            <span style={{ color: '#fff' }}>−</span>
+          </button>
+          <HiShoppingCart size={20} />
+          In Cart ({currentQty})
+          <button
+            onClick={handleIncrease}
+            aria-label="Increase quantity"
+            style={{
+              width: '32px', height: '32px',
+              backgroundColor: '#b89e6f',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '6px',
+              fontSize: '20px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
+            }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#a68b5b')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#b89e6f')}
+          >
+            <span style={{ color: '#fff' }}>+</span>
+          </button>
+        </span>
       </Button>
     </div>
   );

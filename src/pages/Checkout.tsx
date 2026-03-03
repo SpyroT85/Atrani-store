@@ -37,13 +37,15 @@ interface CartItem {
   qty: number;
 }
 
-const cartItems: CartItem[] = [];
-const SHIPPING = 19.95;
+// Use cart context for items
+import { useCart } from '../context/CartContext';
+const SHIPPING = 15.90;
 const COUNTRIES = ["Italy", "Greece", "Germany", "Denmark", "France"];
 
 // ── InputField ──
 function InputField({
   label,
+  
   placeholder,
   value,
   onChange,
@@ -225,7 +227,8 @@ export default function CheckoutPage() {
   const set = (key: keyof FormData) => (value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
+  const { items } = useCart();
+  const subtotal = items.reduce((acc: number, item: CartItem) => acc + item.price * item.qty, 0);
   const tax = 0;
   const grandTotal = subtotal + SHIPPING + tax;
 
@@ -353,11 +356,11 @@ export default function CheckoutPage() {
               Summary
             </h2>
 
-            {cartItems.length === 0 ? (
+            {items.length === 0 ? (
               <p className="text-sm text-gray-400 text-center mb-8">No Items</p>
             ) : (
               <ul className="mb-8 flex flex-col gap-6">
-                {cartItems.map((item, i) => (
+                {items.map((item: CartItem, i: number) => (
                   <li key={i} className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-bold text-gray-900">{item.name}</p>

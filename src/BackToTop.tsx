@@ -1,4 +1,4 @@
-import { PiArrowCircleUp } from "react-icons/pi";
+import { BsCaretUpSquareFill } from "react-icons/bs";
 
 const BackToTop = () => (
   <div style={{
@@ -16,8 +16,8 @@ const BackToTop = () => (
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
     >
-      <PiArrowCircleUp style={{ color: '#1A1A1A', width: '54px', height: '54px', filter: 'drop-shadow(0 0 2px #fff)' }} />
-      <div style={{ textAlign: 'center', color: '#1A1A1A', fontWeight: 'bold', fontSize: '15px', marginTop: '4px', marginLeft: '-12px' }}>Back to Top</div>
+      <BsCaretUpSquareFill style={{ color: '#1A1A1A', width: '36px', height: '36px', filter: 'drop-shadow(0 0 2px #fff)' }} />
+      <div style={{ textAlign: 'center', color: '#1A1A1A', fontWeight: 'bold', fontSize: '15px', marginTop: '4px', marginLeft: '-12px' }}></div>
     </button>
   </div>
 );
