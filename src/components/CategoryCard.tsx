@@ -1,19 +1,18 @@
-interface CategoryCardProps {
+export interface CategoryCardProps {
   image: string;
   title: string;
+  large?: boolean;
 }
 
-const CategoryCard = ({ image, title }: CategoryCardProps) => {
-  // Only apply bottom shadow to PNG images
-  const isPng = image.toLowerCase().endsWith('.png');
+const CategoryCard = ({ image, title, large }: CategoryCardProps) => {
   const imageStyle: React.CSSProperties = {
-    width: 'clamp(120px, 20vw, 200px)',
-    height: 'clamp(120px, 20vw, 200px)',
+    width: 'clamp(150px, 24vw, 220px)',
+    height: 'clamp(150px, 24vw, 220px)',
     transform: title === 'Inkwells' ? 'translateX(20px)' : 'none',
-    filter: isPng ? 'drop-shadow(0 24px 16px rgba(0,0,0,0.5))' : undefined,
+    filter: 'drop-shadow(0 16px 24px rgba(0,0,0,0.65))',
   };
   return (
-    <div className="flex flex-col items-center cursor-pointer transition relative w-full max-w-[280px] mx-auto" style={{ paddingTop: '3rem' }}>
+    <div className="flex flex-col items-center cursor-pointer transition relative w-full max-w-70 mx-auto" style={{ paddingTop: '3rem' }}>
       <div className="flex items-center justify-center" style={{ position: 'relative', zIndex: 2, marginBottom: '-6rem' }}>
         <img src={image} alt={`${title}`} className="object-contain" style={imageStyle} width="200" height="200" loading="lazy" />
       </div>

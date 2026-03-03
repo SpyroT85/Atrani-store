@@ -1,7 +1,7 @@
 import { products } from '@/data/products';
 import Layout from '@/components/Layout';
 import MotionSection from '@/components/MotionSection';
-import { Button } from '@/components/ui/button';
+import CartButton from '@/components/ui/CartButton';
 
 const Pocket = () => {
   return (
@@ -35,14 +35,9 @@ const Pocket = () => {
                       </p>
                       <div className="mb-6"></div>
                       <p className="text-black text-lg font-bold mb-10">{product.price}</p>
-                      <Button
-                        variant="outline"
-                        className="bg-[#d1bb97] text-white hover:text-white uppercase tracking-widest text-sm font-bold transition border-none cursor-pointer rounded-md"
-                        style={{ paddingLeft: '4rem', paddingRight: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}
-                        aria-label="View product details"
-                      >
-                        SEE DETAILS
-                      </Button>
+                      <CartButton />
+                      <div className="w-full flex items-center gap-6 justify-start">
+                      </div>
                     </div>
                     <div className="flex items-center justify-center rounded-2xl overflow-hidden bg-gray-50 shadow-lg" style={{ width: '520px', height: '520px' }}>
                       <img src={product.image} alt={product.name} className="object-cover w-full h-full" width="520" height="520" loading="lazy" />
@@ -61,14 +56,8 @@ const Pocket = () => {
                       <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-10" style={{ marginTop: '1.5rem' }}>
                         {product.description}
                       </p>
-                      <Button
-                        variant="outline"
-                        className="bg-[#d1bb97] text-white hover:text-white uppercase tracking-widest text-sm font-bold transition border-none cursor-pointer rounded-md"
-                        style={{ paddingLeft: '4rem', paddingRight: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}
-                        aria-label="View product details"
-                      >
-                        SEE DETAILS
-                      </Button>
+                      <div className="w-full flex items-center gap-6 justify-start">
+                      </div>
                     </div>
                   </>
                 )}
@@ -78,7 +67,6 @@ const Pocket = () => {
         ))}
       </div>
       <div className="h-24 md:h-14"></div>
-      {/* Compass images are shown in the product boxes below */}
       <div className="h-6 md:h-8"></div>
     </Layout>
   );

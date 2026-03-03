@@ -68,7 +68,6 @@ const FeaturedProducts = () => {
           }
         `}</style>
 
-        {/* ZX7 Style - Image Background */}
         <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', padding: '0 16px' }}>
           <div className="rounded-xl overflow-hidden p-6 sm:p-12 md:p-10 flex flex-col md:flex-row items-center justify-center relative gap-4 md:gap-0" style={{ background: '#E8E8E8', minHeight: '350px' }}>
             <div className="md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left pen-text relative z-10 order-2 md:order-2" style={{ paddingTop: '1.25rem', paddingBottom: '2.5rem' }}>
@@ -78,7 +77,6 @@ const FeaturedProducts = () => {
               <p className="text-black max-w-xs mx-auto md:mx-0" style={{ fontSize: '16px', fontWeight: 400, wordWrap: 'break-word', marginBottom: '2rem' }}>
                 This vintage fountain pen is a timeless writing instrument, crafted with precision and elegance to provide a smooth and luxurious writing experience.
               </p>
-              {/* Mobile image between text and button */}
               <img
                 src="/images/pens/pen1.webp"
                 alt="Vintage Fountain Pen"
@@ -101,10 +99,10 @@ const FeaturedProducts = () => {
               <img
                 src="/images/pens/pen1.webp"
                 alt="Vintage Fountain Pen"
-                className="w-48 md:w-96 lg:w-[28rem] h-auto object-contain rounded-xl"
-                style={{ maxWidth: 'clamp(280px, 60%, 480px)' }}
-                width="360"
-                height="320"
+                className="w-48 md:w-lg lg:w-160 h-auto object-contain rounded-xl"
+                style={{ maxWidth: 'clamp(320px, 90%, 640px)' }}
+                width="480"
+                height="400"
                 loading="lazy"
               />
             </div>

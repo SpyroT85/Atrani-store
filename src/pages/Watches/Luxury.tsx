@@ -1,21 +1,9 @@
 import { products } from '@/data/products';
 import Layout from '@/components/Layout';
 import MotionSection from '@/components/MotionSection';
-import QuantityButton from '@/components/ui/QuantityButton';
-import { AddToCartButton } from '@/components/ui/AddToCartButton';
-import { useState } from 'react';
+import CartButton from '@/components/ui/CartButton';
 
 const Luxury = () => {
-  // Track quantity for each product
-  const [quantities, setQuantities] = useState([1, 1, 1]);
-
-  const handleIncrease = (idx: number) => {
-    setQuantities(q => q.map((val, i) => i === idx ? val + 1 : val));
-  };
-  const handleDecrease = (idx: number) => {
-    setQuantities(q => q.map((val, i) => i === idx ? Math.max(1, val - 1) : val));
-  };
-
   return (
     <Layout>
       <section className="p-0 m-0">
@@ -37,7 +25,7 @@ const Luxury = () => {
               >
                 {index % 2 === 1 ? (
                   <>
-                    <div className={`flex flex-col items-start px-4 md:px-12 justify-self-start`}>
+                    <div className={`flex flex-col items-start px-4 md:px-12 justify-self-start`} style={index === 0 ? { minWidth: '440px', marginLeft: '48px' } : undefined}>
                       <p className="text-accent font-semibold uppercase tracking-[0.5em] text-base mb-6" style={{ marginLeft: '0.5rem' }}>
                         {index === 0 ? 'LX742' : index === 1 ? 'LX529' : 'LX925'}
                       </p>
@@ -47,17 +35,7 @@ const Luxury = () => {
                       </p>
                       <div className="mb-6"></div>
                       <p className="text-black text-lg font-bold mb-10">{product.price}</p>
-                      <div className="w-full flex items-center gap-6 justify-start">
-                        <QuantityButton
-                          value={quantities[index]}
-                          onIncrease={() => handleIncrease(index)}
-                          onDecrease={() => handleDecrease(index)}
-                        />
-                        <AddToCartButton
-                          quantity={quantities[index]}
-                          onClick={(qty) => alert(`Added ${qty} of ${product.name} to basket!`)}
-                        />
-                      </div>
+                      <CartButton />
                     </div>
                     <div className="flex items-center justify-center rounded-2xl overflow-hidden bg-gray-50 shadow-lg" style={{ width: '520px', height: '520px' }}>
                       <img src={product.image} alt={product.name} className="object-cover w-full h-full" width="520" height="520" loading="lazy" />
@@ -68,7 +46,7 @@ const Luxury = () => {
                     <div className="flex items-center justify-start rounded-2xl overflow-hidden bg-gray-50 shadow-lg md:-ml-55" style={{ width: '520px', height: '520px' }}>
                       <img src={product.image} alt={product.name} className="object-cover w-full h-full" width="520" height="520" loading="lazy" />
                     </div>
-                    <div className={`flex flex-col items-start px-4 md:px-12 justify-self-end ${index === 0 ? 'md:-translate-x-60' : ''}`}>
+                    <div className={`flex flex-col items-start px-4 md:px-12`} style={index === 0 ? { minWidth: '440px', marginLeft: 'clamp(-260px, 18vw, -500px)' } : undefined}>
                       <p className="text-accent font-semibold uppercase tracking-[0.5em] text-base mb-6" style={{ marginLeft: '0.5rem' }}>
                         {index === 0 ? 'LX742' : index === 1 ? 'LX529' : 'LX925'}
                       </p>
@@ -76,17 +54,6 @@ const Luxury = () => {
                       <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-10" style={{ marginTop: '1.5rem' }}>
                         {product.description}
                       </p>
-                      <div className="w-full flex items-center gap-6 justify-start">
-                        <QuantityButton
-                          value={quantities[index]}
-                          onIncrease={() => handleIncrease(index)}
-                          onDecrease={() => handleDecrease(index)}
-                        />
-                        <AddToCartButton
-                          quantity={quantities[index]}
-                          onClick={(qty) => alert(`Added ${qty} of ${product.name} to basket!`)}
-                        />
-                      </div>
                     </div>
                   </>
                 )}
@@ -95,8 +62,7 @@ const Luxury = () => {
           </MotionSection>
         ))}
       </div>
-      <div className="h-24 md:h-14"></div>
-      <div className="h-6 md:h-8"></div>
+
     </Layout>
   );
 };

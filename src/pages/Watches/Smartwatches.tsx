@@ -9,7 +9,7 @@ const Smartwatches = () => {
       <section className="p-0 m-0">
         <div className="w-full bg-background flex items-center justify-center overflow-hidden relative" style={{ minHeight: '22vh', padding: '3rem 0 6rem 0', borderTop: 'none', borderLeft: '1px solid rgba(255,255,255,0.1)', borderRight: '1px solid rgba(255,255,255,0.1)' }}>
           <div className="w-full flex items-center justify-center" style={{ height: '100%' }}>
-            <h1 className="text-6xl md:text-7xl text-white tracking-tight drop-shadow-lg" style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 400, textAlign: 'center', fontSize: 'clamp(40px, 7vw, 64px)' }}>Smartwatches</h1>
+                <h1 className="text-6xl md:text-7xl text-white tracking-tight drop-shadow-lg" style={{ fontFamily: 'Nanum Myeongjo, serif', fontWeight: 400, textAlign: 'center', fontSize: 'clamp(40px, 7vw, 64px)' }}>Smartwatches</h1>
           </div>
         </div>
       </section>

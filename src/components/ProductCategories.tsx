@@ -3,7 +3,7 @@ import CategoryCard from './CategoryCard';
 const ProductCategories = () => {
   const categories = [
     { image: '/images/watches/main-image.webp', title: 'Watches' },
-    { image: '/images/pens/pen1.webp', title: 'Pens' },
+    { image: '/images/pens/main-pen.webp', title: 'Pens' },
     { image: '/images/inkwells/main-inkwell.webp', title: 'Inkwells' },
     { image: '/images/compasses/main-compass.webp', title: 'Compasses' },
   ];
@@ -18,6 +18,7 @@ const ProductCategories = () => {
                 key={category.title} 
                 image={category.image} 
                 title={category.title} 
+                large={category.title === 'Inkwells' || category.title === 'Pens'}
               />
             ))}
           </div>

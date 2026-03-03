@@ -11,6 +11,7 @@ import FountainPens from './pages/Pens/Fountain';
 import BackToTop from './BackToTop';
 import Compasses from './pages/Compasses/Compasses';
 import Inkwells from './pages/Inkwells/Inkwells';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/pens/fountain" element={<FountainPens />} />
         <Route path="/compasses" element={<Compasses />} />
         <Route path="/inkwells" element={<Inkwells />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
