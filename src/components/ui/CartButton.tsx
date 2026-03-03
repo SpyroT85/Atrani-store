@@ -18,9 +18,6 @@ const CartButton: React.FC<CartButtonProps> = ({ productId, productName, product
   const handleAdd = () => {
     addItem({ id: productId, name: productName, price: productPrice, image: productImage });
   };
-  const handleRemove = () => {
-    removeItem(productId);
-  };
 
   const buttonStyles = "bg-[#b89e6f] text-white uppercase tracking-widest text-sm font-bold transition border-none cursor-pointer rounded-md flex items-center justify-center w-full";
   const buttonPadding = { padding: '2rem 2rem', minWidth: '210px' };
