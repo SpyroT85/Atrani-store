@@ -116,15 +116,15 @@ function InputField({
 function CardInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const [focused, setFocused] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [digits, setDigits] = useState("");
   const hiddenRef = useRef<HTMLInputElement>(null);
 
+  // Remove spaces and non-digits, then format
+  const digits = value.replace(/\D/g, "").slice(0, 16);
   const formatted = digits.match(/.{1,4}/g)?.join(" ") ?? digits;
   const maskedValue = formatted.replace(/\d/g, "●");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.replace(/\D/g, "").slice(0, 16);
-    setDigits(raw);
     onChange(raw.match(/.{1,4}/g)?.join(" ") ?? raw);
   };
 

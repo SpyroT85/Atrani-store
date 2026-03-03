@@ -18,7 +18,6 @@ const ProductCategories = () => {
                 key={category.title} 
                 image={category.image} 
                 title={category.title} 
-                large={category.title === 'Inkwells' || category.title === 'Pens'}
               />
             ))}
           </div>

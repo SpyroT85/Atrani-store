@@ -1,10 +1,9 @@
 export interface CategoryCardProps {
   image: string;
   title: string;
-  large?: boolean;
 }
 
-const CategoryCard = ({ image, title, large }: CategoryCardProps) => {
+const CategoryCard = ({ image, title }: CategoryCardProps) => {
   const imageStyle: React.CSSProperties = {
     width: 'clamp(150px, 24vw, 220px)',
     height: 'clamp(150px, 24vw, 220px)',
