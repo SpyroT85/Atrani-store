@@ -1,10 +1,9 @@
 import { products } from '@/data/products';
 import Layout from '@/components/Layout';
 import MotionSection from '@/components/MotionSection';
-import { Button } from '@/components/ui/button';
 import QuantityButton from '@/components/ui/QuantityButton';
 import { AddToCartButton } from '@/components/ui/AddToCartButton';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Luxury = () => {
   // Track quantity for each product
