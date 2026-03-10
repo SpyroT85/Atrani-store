@@ -170,8 +170,8 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
             {/* Info — centered on mobile, left on desktop, with side padding */}
             <div
               ref={infoRef}
-              className="flex flex-col items-center md:items-start text-center md:text-left w-full"
-              style={{ flex: 1, minWidth: 0, paddingTop: "0.5rem" }}
+              className="flex flex-col items-center md:items-start text-center md:text-left w-full px-5 md:px-0"
+              style={{ flex: 1, minWidth: 0, paddingTop: '0.5rem' }}
             >
               {product.code && (
                 <p style={{
