@@ -1,12 +1,12 @@
 import { products } from '@/data/products';
 import CategoryPageLayout from '@/components/CategoryPageLayout';
 
-const Compasses = () => (
+const Atrani = () => (
   <CategoryPageLayout
-    title="Compasses"
-    products={products.compasses}
-    basePath="/compasses"
+    title="Atrani"
+    products={products.watches}
+    basePath="/watches"
   />
 );
 
-export default Compasses;
+export default Atrani;

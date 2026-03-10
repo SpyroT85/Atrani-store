@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiShoppingCart } from "react-icons/hi2";
 import { Button } from './button';
-import { useCart } from '../../context/CartContext';
+import { useCart } from '../../hooks/useCart';
 
 interface CartButtonProps {
   productId: string;
@@ -13,7 +13,7 @@ interface CartButtonProps {
 
 const CartButton: React.FC<CartButtonProps> = ({ productId, productName, productPrice, productImage, className }) => {
   const { addItem, removeItem, items } = useCart();
-  const currentQty = items.find(i => i.id === productId)?.qty ?? 0;
+  const currentQty = items.find((i: { id: string; qty: number }) => i.id === productId)?.qty ?? 0;
 
   const handleAdd = () => {
     addItem({ id: productId, name: productName, price: productPrice, image: productImage });

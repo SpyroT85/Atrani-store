@@ -1,11 +1,11 @@
-import Layout from '../components/Layout';
-import MotionSection from '../components/MotionSection';
+import Layout from '../../components/Layout';
+import MotionSection from '../../components/MotionSection';
 import { Suspense, lazy } from 'react';
 
-const Hero = lazy(() => import('../components/Hero'));
-const ProductCategories = lazy(() => import('../components/ProductCategories'));
-const FeaturedProducts = lazy(() => import('../components/FeaturedProducts'));
-const About = lazy(() => import('../components/About'));
+const Hero = lazy(() => import('../../components/Hero'));
+const ProductCategories = lazy(() => import('../../components/ProductCategories'));
+const FeaturedProducts = lazy(() => import('../../components/FeaturedProducts'));
+const About = lazy(() => import('../About/About'));
 
 const Home = () => {
   return (

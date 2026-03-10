@@ -9,16 +9,16 @@ const FeaturedProducts = () => {
         <div className="flex flex-col gap-12">
         {/* ZX9 Style - Large Featured */}
         <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', padding: '0 16px' }}>
-          <div className="featured-zx9-box rounded-xl overflow-hidden flex flex-col md:flex-row items-center justify-center p-6 sm:p-12 md:p-12 relative" style={{ background: '#BFA57A' }}>
+          <div className="featured-zx9-box rounded-xl flex flex-col md:flex-row items-center justify-center p-6 sm:p-12 md:p-12 relative" style={{ background: '#BFA57A', overflow: 'hidden', borderRadius: '12px' }}>
           <div className="md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left heritage-text" style={{ zIndex: 3, paddingBottom: '2rem', paddingTop: '1rem' }}>
               <h2 className="text-white font-bold" style={{ fontSize: 'clamp(28px, 5vw, 46px)', lineHeight: '1.1', marginBottom: '1.2rem' }}>
-                HERITAGE<br />DIVER
+                ATRANI<br />LIMITED
               </h2>
               <p className="text-white/90 mb-10 max-w-xs mx-auto md:mx-0 md:max-w-md" style={{ fontSize: '16px', fontWeight: 400 }}>
-                A timeless classic featuring exquisite two-tone craftsmanship. This vintage-inspired timepiece embodies the golden age of horology with modern precision and enduring elegance.
+                Atrani Limited: a refined timepiece with gold-accented stainless steel, sapphire crystal glass, and water resistance. Designed for those who value exclusivity and elegance.
               </p>
               <div className="flex justify-center md:justify-start">
-                <Link to="/watches/luxury" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
+                <Link to="/watches/watches-limited" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
                   <Button variant="outline" className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md w-full" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
                     See Details
                   </Button>
@@ -30,15 +30,15 @@ const FeaturedProducts = () => {
                 <img 
                   src="/images/watches/watch2.webp" 
                   alt="ZX9 Chronograph" 
-                  className="w-72 h-72 md:w-100 md:h-100 object-contain" 
-                  style={{ zIndex: 2 }}
-                  width="400"
-                  height="400"
+                  className="w-150 h-150 md:w-175 md:h-175 object-contain"
+                  style={{ zIndex: 2, transform: 'scale(1.25)', transformOrigin: 'center' }}
+                  width="900"
+                  height="800"
                   loading="lazy"
                 />
               </div>
               {/* Circular accent */}
-              <div className="absolute left-1/2" style={{ top: '50%', transform: 'translate(-50%, -50%)', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(255,255,255,0.07)', zIndex: 1 }}></div>
+              <div className="absolute left-1/2" style={{ top: '50%', transform: 'translate(-50%, -50%)', width: '450px', height: '450px', borderRadius: '50%', background: 'rgba(255,255,255,0.07)', zIndex: 1 }}></div>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@ const FeaturedProducts = () => {
           }
           @media (min-width: 768px) {
             .featured-zx9-box {
-              height: 450px;
+              height: 500px;
             }
             .heritage-text {
               padding-left: clamp(1.5rem, 6vw, 4rem);

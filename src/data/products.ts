@@ -1,31 +1,33 @@
-export const products = {
+import type { Products } from '../types/productTypes';
+
+export const products: Products = {
   watches: [
     {
       id: 'watches-classic',
       name: 'Atrani Classic',
       description: 'Swiss Automatic movement. Water resistant up to 200m (20 ATM) — perfect for diving. Case material: Brushed Titanium. Sapphire crystal glass.',
-      image: '/images/watches/classic.webp',
+      image: '/images/watches/Atrani/atrani-classic.webp',
       material: 'Brushed Titanium',
       waterResistance: '200m (20 ATM)',
       price: 1250
     },
     {
-      id: 'watches-modern',
-      name: 'Atrani Modern',
-      description: 'Quartz movement. Water resistant up to 100m (10 ATM) — swim and snorkel ready. Case material: Stainless Steel with Sapphire Crystal.',
-      image: '/images/watches/modern.webp',
-      material: 'Stainless Steel',
-      waterResistance: '100m (10 ATM)',
-      price: 890
-    },
-    {
       id: 'watches-limited',
       name: 'Atrani Limited',
       description: 'Limited Edition. Water resistant up to 50m (5 ATM). Case material: Gold Accents on Stainless Steel. Sapphire crystal glass.',
-      image: '/images/watches/limited.webp',
+      image: '/images/watches/Atrani/atrani-limited.webp',
       material: 'Gold Accents on Stainless Steel',
       waterResistance: '50m (5 ATM)',
       price: 2100
+    },
+    {
+      id: 'watches-modern',
+      name: 'Atrani Modern',
+      description: 'Quartz movement. Water resistant up to 100m (10 ATM) — swim and snorkel ready. Case material: Stainless Steel with Sapphire Crystal.',
+      image: '/images/watches/Atrani/atrani-modern.webp',
+      material: 'Stainless Steel',
+      waterResistance: '100m (10 ATM)',
+      price: 890
     },
   ],
   'watches/luxury': [

@@ -10,9 +10,7 @@ import { IoBagHandleSharp } from "react-icons/io5";
 import { IoIosMenu } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import CartDrawer from './ui/CartDrawer';
-import { useCart } from '../context/CartContext';
-
-// Additional imports can go here
+import { useCart } from '../hooks/useCart';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,18 +22,35 @@ const Navbar = () => {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
-  const totalItems = items.reduce((acc, item) => acc + item.qty, 0);
+  const totalItems = items.reduce((acc: number, item: { qty: number }) => acc + item.qty, 0);
+
+  const navLinkStyle = {
+    fontFamily: 'Manrope, sans-serif',
+    fontSize: '11px',
+    fontWeight: 600,
+    letterSpacing: '0.15em',
+  };
+
+  const dropdownItemStyle = {
+    fontFamily: 'Manrope, sans-serif',
+    fontSize: '10px',
+    letterSpacing: '0.12em',
+    padding: '16px 12px',
+  };
 
   return (
     <>
-      <nav className="relative px-4 md:px-12 py-4 bg-background text-white" style={{ minHeight: '60px', fontFamily: '-apple-system, BlinkMacSystemFont' }}>
+      <nav className="relative px-4 md:px-12 py-4 bg-background text-white" style={{ minHeight: '60px' }}>
 
         {/* Mobile Layout */}
         <div className="grid grid-cols-3 items-center md:hidden" style={{ paddingTop: '12px' }}>
           <div className="flex items-center justify-start" style={{ marginLeft: '8px' }}>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex justify-center items-center hover:text-[#A67C52] transition border border-white/20 rounded p-2"
+              className="flex justify-center items-center transition border border-white/20 rounded p-2"
+              style={{ color: 'white' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'white')}
               aria-label="Toggle mobile menu"
             >
               <IoIosMenu className="w-8 h-8" />
@@ -56,7 +71,10 @@ const Navbar = () => {
           <div className="flex justify-end" style={{ marginRight: '8px' }}>
             <button
               onClick={() => setCartOpen(true)}
-              className="hover:text-[#A67C52] transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none"
+              className="transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none"
+              style={{ color: 'white' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'white')}
             >
               <IoBagHandleSharp className="w-7 h-7" />
               <span className="text-base">({totalItems})</span>
@@ -80,55 +98,91 @@ const Navbar = () => {
           </div>
 
           {/* Nav links */}
-          <div className="flex justify-center gap-4 md:gap-12 uppercase font-bold tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(8px, 1vw, 11px)', marginLeft: 'clamp(0px, 10vw, 120px)' }}>
-            <Link to="/" className="hover:text-[#A67C52] transition cursor-pointer">Home</Link>
+          <div className="flex justify-center gap-4 md:gap-12 uppercase whitespace-nowrap" style={{ ...navLinkStyle, marginLeft: 'clamp(0px, 10vw, 120px)' }}>
+            <Link to="/" className="transition cursor-pointer" style={{ ...navLinkStyle, color: 'white' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Home</Link>
+
             <DropdownMenu>
-              <DropdownMenuTrigger className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition outline-none bg-transparent border-none cursor-pointer" style={{ fontSize: '11px' }}>Watches</DropdownMenuTrigger>
-              <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', padding: '8px', borderTop: '3px solid #A67C52' }}>
-                <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
+              <DropdownMenuTrigger className="uppercase transition outline-none bg-transparent border-none cursor-pointer" style={{ ...navLinkStyle, color: 'white' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'white')}>
+                Watches
+              </DropdownMenuTrigger>
+              <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 relative overflow-visible" style={{ fontFamily: 'Manrope, sans-serif', padding: '8px', borderTop: '3px solid #a37a41' }}>
+                <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #a37a41', zIndex: 10 }} />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <Link to="/watches/luxury" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Luxury</Link>
+                  <DropdownMenuItem asChild>
+                    <Link to="/watches/atrani" className="cursor-pointer uppercase tracking-wider justify-center" style={dropdownItemStyle}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#a37a41'; e.currentTarget.style.color = 'white'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'white'; }}>Atrani</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link to="/watches/smartwatches" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Smartwatches</Link>
+                  <DropdownMenuItem asChild>
+                    <Link to="/watches/luxury" className="cursor-pointer uppercase tracking-wider justify-center" style={dropdownItemStyle}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#a37a41'; e.currentTarget.style.color = 'white'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'white'; }}>Luxury</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link to="/watches/pocket" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Pocket</Link>
+                  <DropdownMenuItem asChild>
+                    <Link to="/watches/smartwatches" className="cursor-pointer uppercase tracking-wider justify-center" style={dropdownItemStyle}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#a37a41'; e.currentTarget.style.color = 'white'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'white'; }}>Smartwatches</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/watches/pocket" className="cursor-pointer uppercase tracking-wider justify-center" style={dropdownItemStyle}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#a37a41'; e.currentTarget.style.color = 'white'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'white'; }}>Pocket</Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
+
             <DropdownMenu>
-              <DropdownMenuTrigger className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition outline-none bg-transparent border-none cursor-pointer" style={{ fontSize: '11px' }}>Pens</DropdownMenuTrigger>
-              <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 relative overflow-visible" style={{ fontFamily: '-apple-system, BlinkMacSystemFont', padding: '8px', borderTop: '3px solid #A67C52' }}>
-                <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #A67C52', zIndex: 10 }}></div>
+              <DropdownMenuTrigger className="uppercase transition outline-none bg-transparent border-none cursor-pointer" style={{ ...navLinkStyle, color: 'white' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'white')}>
+                Pens
+              </DropdownMenuTrigger>
+              <DropdownMenuContent sideOffset={16} className="bg-background border border-white/10 text-white min-w-30 relative overflow-visible" style={{ fontFamily: 'Manrope, sans-serif', padding: '8px', borderTop: '3px solid #a37a41' }}>
+                <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid #a37a41', zIndex: 10 }} />
                 <DropdownMenuGroup>
                   <DropdownMenuItem asChild>
-                    <Link to="/pens/quill" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Quill Pens</Link>
+                    <Link to="/pens/quill" className="cursor-pointer uppercase tracking-wider justify-center" style={dropdownItemStyle}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#a37a41'; e.currentTarget.style.color = 'white'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'white'; }}>Quill Pens</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/pens/fountain" className="hover:bg-[#A67C52]/10 cursor-pointer uppercase tracking-wider justify-center" style={{ fontSize: '10px', padding: '16px 12px' }}>Fountain Pens</Link>
+                    <Link to="/pens/fountain" className="cursor-pointer uppercase tracking-wider justify-center" style={dropdownItemStyle}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#a37a41'; e.currentTarget.style.color = 'white'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'white'; }}>Fountain Pens</Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Link to="/compasses" className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition cursor-pointer" style={{ fontSize: '11px', whiteSpace: 'nowrap', marginRight: '6px' }}>Compasses</Link>
-            <Link to="/inkwells" className="uppercase font-bold tracking-wider text-white hover:text-[#A67C52] transition cursor-pointer" style={{ fontSize: '11px' }}>Inkwells</Link>
-            <a href="#contact" className="hover:text-[#A67C52] transition cursor-pointer" style={{ whiteSpace: 'nowrap', position: 'relative', zIndex: 10 }}>Contact Us</a>
+
+            <Link to="/compasses" className="uppercase transition cursor-pointer" style={{ ...navLinkStyle, color: 'white', whiteSpace: 'nowrap', marginRight: '6px' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Compasses</Link>
+            <Link to="/inkwells" className="uppercase transition cursor-pointer" style={{ ...navLinkStyle, color: 'white' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Inkwells</Link>
+            <a href="#contact" className="transition cursor-pointer" style={{ ...navLinkStyle, color: 'white', whiteSpace: 'nowrap', position: 'relative', zIndex: 10 }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Contact Us</a>
           </div>
 
-          {/* Cart button — ανοίγει drawer αντί για dropdown */}
+          {/* Cart button */}
           <div className="flex justify-end" style={{ marginRight: 'clamp(80px, 8vw, 200px)' }}>
             <button
               onClick={() => setCartOpen(true)}
-              className="hover:text-[#A67C52] transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none relative"
+              className="transition flex items-center gap-1 cursor-pointer outline-none bg-transparent border-none relative"
+              style={{ color: 'white' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'white')}
             >
               <IoBagHandleSharp className="w-7 h-7" />
-              <span className="text-base">({totalItems})</span>
-              {/* Badge */}
+              <span className="text-base" style={{ fontFamily: 'Manrope, sans-serif' }}>({totalItems})</span>
               {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#A67C52] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold" style={{ fontSize: '9px' }}>
+                <span className="absolute -top-2 -right-2 text-white rounded-full w-4 h-4 flex items-center justify-center font-bold" style={{ fontSize: '9px', fontFamily: 'Manrope, sans-serif', backgroundColor: '#a37a41' }}>
                   {totalItems}
                 </span>
               )}
@@ -138,67 +192,83 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-[#1a1a1a] border-t border-[#A67C52] z-50 shadow-xl">
-            <div className="flex flex-col uppercase font-bold tracking-wider text-sm text-center" style={{ paddingTop: '16px', paddingBottom: '16px', paddingLeft: '24px', paddingRight: '24px' }}>
-              <Link to="/" className="hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }} onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+          <div className="md:hidden absolute top-full left-0 right-0 bg-[#1a1a1a] z-50 shadow-xl" style={{ borderTop: '1px solid #a37a41' }}>
+            <div className="flex flex-col uppercase text-center" style={{ paddingTop: '16px', paddingBottom: '16px', paddingLeft: '24px', paddingRight: '24px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', fontSize: '13px' }}>
+              <Link to="/" style={{ paddingTop: '16px', paddingBottom: '16px', color: 'white' }} onClick={() => setIsMobileMenuOpen(false)}
+                onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Home</Link>
 
               <div>
-                <button onClick={() => toggleSection('watches')} className="w-full text-center hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }}>WATCHES</button>
+                <button onClick={() => toggleSection('watches')} className="w-full text-center transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', color: 'white', background: 'none', border: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'white')}>WATCHES</button>
                 {expandedSection === 'watches' && (
-                  <div className="flex flex-col gap-4 pb-4 text-xs">
-                    <Link to="/watches/luxury" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Luxury</Link>
-                    <Link to="/watches/smartwatches" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Smartwatches</Link>
-                    <Link to="/watches/pocket" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Pocket</Link>
+                  <div className="flex flex-col gap-4 pb-4" style={{ fontSize: '11px', fontFamily: 'Manrope, sans-serif', letterSpacing: '0.12em' }}>
+                    {[{ to: '/watches/atrani', label: 'Atrani' }, { to: '/watches/luxury', label: 'Luxury' }, { to: '/watches/smartwatches', label: 'Smartwatches' }, { to: '/watches/pocket', label: 'Pocket' }].map(({ to, label }) => (
+                      <Link key={to} to={to} style={{ color: 'white', padding: '8px 0' }} onClick={() => setIsMobileMenuOpen(false)}
+                        onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                        onMouseLeave={e => (e.currentTarget.style.color = 'white')}>{label}</Link>
+                    ))}
                   </div>
                 )}
               </div>
 
               <div>
-                <button onClick={() => toggleSection('pens')} className="w-full text-center hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }}>PENS</button>
+                <button onClick={() => toggleSection('pens')} className="w-full text-center transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', color: 'white', background: 'none', border: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'white')}>PENS</button>
                 {expandedSection === 'pens' && (
-                  <div className="flex flex-col gap-4 pb-4 text-xs">
-                    <Link to="/pens/quill" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Quill Pens</Link>
-                    <a href="#steel" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Steel Nib Pens</a>
-                    <Link to="/pens/fountain" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Fountain Pens</Link>
+                  <div className="flex flex-col gap-4 pb-4" style={{ fontSize: '11px', fontFamily: 'Manrope, sans-serif', letterSpacing: '0.12em' }}>
+                    {[{ to: '/pens/quill', label: 'Quill Pens' }, { to: '/pens/fountain', label: 'Fountain Pens' }].map(({ to, label }) => (
+                      <Link key={to} to={to} style={{ color: 'white', padding: '8px 0' }} onClick={() => setIsMobileMenuOpen(false)}
+                        onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                        onMouseLeave={e => (e.currentTarget.style.color = 'white')}>{label}</Link>
+                    ))}
                   </div>
                 )}
               </div>
 
               <div>
-                <button onClick={() => toggleSection('inkwells')} className="w-full text-center hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }}>INKWELLS</button>
+                <button onClick={() => toggleSection('inkwells')} className="w-full text-center transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', color: 'white', background: 'none', border: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'white')}>INKWELLS</button>
                 {expandedSection === 'inkwells' && (
-                  <div className="flex flex-col gap-4 pb-4 text-xs">
-                    <a href="#crystal" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Crystal Inkwells</a>
-                    <a href="#brass-ink" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Brass Inkwells</a>
-                    <a href="#traveling" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Traveling Inkwells</a>
+                  <div className="flex flex-col gap-4 pb-4" style={{ fontSize: '11px', fontFamily: 'Manrope, sans-serif', letterSpacing: '0.12em' }}>
+                    <Link to="/inkwells" style={{ color: 'white', padding: '8px 0' }} onClick={() => setIsMobileMenuOpen(false)}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'white')}>All Inkwells</Link>
                   </div>
                 )}
               </div>
 
               <div>
-                <button onClick={() => toggleSection('compasses')} className="w-full text-center hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }}>COMPASSES</button>
+                <button onClick={() => toggleSection('compasses')} className="w-full text-center transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', color: 'white', background: 'none', border: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'white')}>COMPASSES</button>
                 {expandedSection === 'compasses' && (
-                  <div className="flex flex-col gap-4 pb-4 text-xs">
-                    <a href="#brass-compass" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Brass Compasses</a>
-                    <a href="#pocket-compass" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Pocket Compasses</a>
-                    <a href="#nautical" className="hover:text-[#A67C52] transition py-2" onClick={() => setIsMobileMenuOpen(false)}>Nautical Compasses</a>
+                  <div className="flex flex-col gap-4 pb-4" style={{ fontSize: '11px', fontFamily: 'Manrope, sans-serif', letterSpacing: '0.12em' }}>
+                    <Link to="/compasses" style={{ color: 'white', padding: '8px 0' }} onClick={() => setIsMobileMenuOpen(false)}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'white')}>All Compasses</Link>
                   </div>
                 )}
               </div>
 
-              <a href="#contact" className="hover:text-[#A67C52] transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px' }} onClick={() => setIsMobileMenuOpen(false)}>Contact Us</a>
+              <a href="#contact" style={{ paddingTop: '16px', paddingBottom: '16px', color: 'white' }} onClick={() => setIsMobileMenuOpen(false)}
+                onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Contact Us</a>
             </div>
           </div>
         )}
       </nav>
-       <CartDrawer
-         isOpen={cartOpen}
-         onClose={() => setCartOpen(false)}
-         items={items}
-         onRemoveAll={removeAll}
-         onUpdateQty={updateQty}
-         onRemoveItem={removeItem}
-       />
+      <CartDrawer
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+        items={items}
+        onRemoveAll={removeAll}
+        onUpdateQty={updateQty}
+        onRemoveItem={removeItem}
+      />
     </>
   );
 };
