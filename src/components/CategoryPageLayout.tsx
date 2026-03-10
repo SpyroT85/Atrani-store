@@ -23,7 +23,7 @@ const CategoryPageLayout = memo(({
   title,
   products,
   basePath,
-  fontFamily = 'Manrope, sans-serif',
+  // ...existing code...
 }: CategoryPageLayoutProps) => {
   return (
     <Layout>

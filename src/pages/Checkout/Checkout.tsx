@@ -111,7 +111,7 @@ function InputField({
   );
 }
 
-function CardInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+function CardInput({ onChange }: { onChange: (v: string) => void }) {
   const [focused, setFocused] = useState(false);
   const [visible, setVisible] = useState(false);
   const [digits, setDigits] = useState("");
@@ -271,7 +271,7 @@ export default function CheckoutPage() {
                 </div>
                 {form.paymentMethod === "e-money" && (
                   <>
-                    <CardInput value={form.walletId} onChange={set("walletId")} />
+                    <CardInput onChange={set("walletId")} />
                     <InputField label="PIN Code" placeholder="●●●●" value={form.walletPin} onChange={(v) => set("walletPin")(v.replace(/\D/g, "").slice(0, 4))} maxLength={4} mono toggleable />
                   </>
                 )}
