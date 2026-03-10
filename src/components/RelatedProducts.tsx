@@ -106,7 +106,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
 
   const arrowStyle = (active: boolean): React.CSSProperties => ({
     position: 'absolute',
-    top: '50%',
+    top: '45%',
     transform: 'translateY(-50%)',
     zIndex: 10,
     background: 'none',
@@ -117,10 +117,13 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
     fontFamily: 'Cormorant Garamond, serif',
     fontWeight: 300,
     lineHeight: 1,
-    padding: '0 8px',
+    padding: '0 4px',
     transition: 'color 0.2s ease',
     userSelect: 'none',
   });
+
+  // On mobile show 1.3 cards, on desktop show ~4
+  const cardWidth = typeof window !== 'undefined' && window.innerWidth < 640 ? '72vw' : '220px';
 
   return (
     <div style={{ width: '100%' }}>
@@ -128,7 +131,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
       {/* Title */}
       <h2 style={{
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+        fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
         fontWeight: 300,
         color: '#1a1208',
         letterSpacing: '0.01em',
@@ -138,22 +141,24 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
         You may also like
       </h2>
 
-      {/* Carousel wrapper with side arrows */}
-      <div style={{ position: 'relative', paddingLeft: '54px', paddingRight: '54px' }}>
+      {/* Carousel wrapper */}
+      <div style={{ position: 'relative', paddingLeft: '40px', paddingRight: '40px' }}>
 
-        {/* Left arrow */}
+        {/* Left arrow — hidden on mobile */}
         <button
           onClick={() => emblaApi?.scrollPrev()}
           aria-label="Previous"
+          className="hidden sm:block"
           style={{ ...arrowStyle(canScrollPrev), left: 0 }}
         >
           ‹
         </button>
 
-        {/* Right arrow */}
+        {/* Right arrow — hidden on mobile */}
         <button
           onClick={() => emblaApi?.scrollNext()}
           aria-label="Next"
+          className="hidden sm:block"
           style={{ ...arrowStyle(canScrollNext), right: 0 }}
         >
           ›
@@ -164,7 +169,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
           ref={(el) => { emblaRef(el); (viewportRef as any).current = el; }}
           style={{ overflow: 'hidden', paddingBottom: '8px' }}
         >
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div style={{ display: 'flex', gap: '16px' }}>
             {randomProducts.map((product) => (
               <div
                 key={product.id}
@@ -172,7 +177,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
                 onMouseLeave={() => setHoveredId(null)}
                 style={{
                   flexShrink: 0,
-                  width: '220px',
+                  width: cardWidth,
                   background: '#fff',
                   borderRadius: '4px',
                   overflow: 'hidden',
@@ -184,8 +189,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
                   transition: 'box-shadow 0.3s ease, transform 0.3s ease',
                 }}
               >
-                {/* Image */}
-                <div style={{ height: '220px', overflow: 'hidden', background: '#f5f0ea' }}>
+                <div style={{ height: '200px', overflow: 'hidden', background: '#f5f0ea' }}>
                   <img
                     src={product.image}
                     alt={product.name}
@@ -199,13 +203,11 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
                     loading="lazy"
                   />
                 </div>
-
-                {/* Info */}
-                <div style={{ padding: '1rem 1rem 1.1rem' }}>
-                  <div style={{ width: '24px', height: '1px', background: '#C8874A', marginBottom: '0.6rem' }} />
+                <div style={{ padding: '0.9rem 0.9rem 1rem' }}>
+                  <div style={{ width: '24px', height: '1px', background: '#C8874A', marginBottom: '0.5rem' }} />
                   <p style={{
                     fontFamily: 'Cormorant Garamond, serif',
-                    fontSize: '1rem',
+                    fontSize: '0.95rem',
                     fontWeight: 400,
                     color: '#1a1208',
                     lineHeight: 1.25,
@@ -215,10 +217,10 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
                   </p>
                   <p style={{
                     fontFamily: 'Manrope, sans-serif',
-                    fontSize: '0.78rem',
+                    fontSize: '0.75rem',
                     fontWeight: 300,
                     color: '#9a8a78',
-                    marginBottom: '0.85rem',
+                    marginBottom: '0.75rem',
                     letterSpacing: '0.03em',
                   }}>
                     €{product.price.toLocaleString('el-GR')}
@@ -236,7 +238,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
 
       {/* Dots */}
       {scrollSnaps.length > 1 && (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '2rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '1.5rem' }}>
           {scrollSnaps.map((_, i) => (
             <button
               key={i}

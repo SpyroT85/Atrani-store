@@ -10,26 +10,35 @@ const About = lazy(() => import('../About/About'));
 const Home = () => {
   return (
     <Layout>
-      <Suspense fallback={<div style={{height: '300px'}}></div>}>
+      <Suspense fallback={<div style={{ height: '300px' }} />}>
         <MotionSection direction="left">
           <Hero />
         </MotionSection>
       </Suspense>
-      <Suspense fallback={<div style={{height: '200px'}}></div>}>
+
+      <Suspense fallback={<div style={{ height: '200px' }} />}>
         <MotionSection direction="right">
           <ProductCategories />
         </MotionSection>
       </Suspense>
-      <div className="h-16 md:h-24"></div>
-      <Suspense fallback={<div style={{height: '200px'}}></div>}>
-        <MotionSection direction="left">
-          <FeaturedProducts />
-        </MotionSection>
-      </Suspense>
-      <div className="h-16 md:h-24"></div>
-      <Suspense fallback={<div style={{height: '200px'}}></div>}>
+
+      <div className="h-16 md:h-24" />
+
+      <Suspense fallback={<div style={{ height: '200px' }} />}>
         <MotionSection direction="right">
           <About />
+        </MotionSection>
+      </Suspense>
+
+      <div className="h-16 md:h-24" />
+
+      {/* FeaturedProducts — above footer with fade-out to dark */}
+      <Suspense fallback={<div style={{ height: '200px' }} />}>
+        <MotionSection direction="left">
+          <div style={{ position: 'relative', paddingBottom: '60px' }}>
+            <FeaturedProducts />
+
+          </div>
         </MotionSection>
       </Suspense>
     </Layout>

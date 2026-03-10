@@ -11,19 +11,19 @@ interface MotionSectionProps {
 const MotionSection = ({
   children,
   direction = "left",
-  amount = 0.2,
-  duration = 1,
+  amount = 0.1,
+  duration = 0.8,
 }: MotionSectionProps) => {
   const initial = direction === "left"
-    ? { x: -100, opacity: 0 }
-    : { x: 100, opacity: 0 };
+    ? { x: -60, opacity: 0 }
+    : { x: 60, opacity: 0 };
 
   return (
     <motion.div
       initial={initial}
       whileInView={{ x: 0, opacity: 1 }}
-      transition={{ duration }}
-      viewport={{ once: true, amount }}
+      transition={{ duration, ease: "easeOut" }}
+      viewport={{ once: true, amount, margin: "0px 0px -50px 0px" }}
     >
       {children}
     </motion.div>

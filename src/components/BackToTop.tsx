@@ -1,16 +1,20 @@
+
 import { BsCaretUpSquareFill } from "react-icons/bs";
 
 const BackToTop = () => (
-  <div style={{
-    position: 'absolute',
-    right: '30px',
-    bottom: '380px',
-    zIndex: 100,
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    padding: 0,
-  }}>
+  <div
+    className="hidden md:block"
+    style={{
+      position: 'absolute',
+      right: '30px',
+      bottom: '380px',
+      zIndex: 100,
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      padding: 0,
+    }}
+  >
     <button
       aria-label="Back to top"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

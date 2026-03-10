@@ -22,7 +22,6 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
   const categoryProducts = products[category as CategoryKey] as any[];
   const product = categoryProducts?.find((p) => p.id === id);
 
-  // Fade-in animation on mount
   useEffect(() => {
     const els = [imageRef.current, infoRef.current];
     els.forEach((el, i) => {
@@ -50,25 +49,20 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
   return (
     <Layout>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap');
-
         .pdp-divider {
           width: 48px;
           height: 1px;
           background: #C8874A;
           margin-bottom: 2rem;
+          /* centered on mobile via parent flex items-center */
         }
-
         .pdp-spec-row {
           display: flex;
           align-items: baseline;
-          gap: 0;
           padding: 0.75rem 0;
           border-bottom: 1px solid #e8e0d5;
         }
-        .pdp-spec-row:first-child {
-          border-top: 1px solid #e8e0d5;
-        }
+        .pdp-spec-row:first-child { border-top: 1px solid #e8e0d5; }
         .pdp-spec-label {
           font-family: 'Manrope', sans-serif;
           font-size: 0.7rem;
@@ -76,7 +70,7 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
           letter-spacing: 0.15em;
           text-transform: uppercase;
           color: #9a8a78;
-          width: 140px;
+          width: 130px;
           flex-shrink: 0;
         }
         .pdp-spec-value {
@@ -85,7 +79,6 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
           font-weight: 400;
           color: #2a2118;
         }
-
         .pdp-back-btn {
           display: inline-flex;
           align-items: center;
@@ -113,13 +106,12 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
           transition: width 0.2s ease;
         }
         .pdp-back-btn:hover::before { width: 28px; }
-
         .pdp-image-wrap {
           position: relative;
           border-radius: 4px;
           overflow: hidden;
           background: #f5f0ea;
-          box-shadow: 0 24px 64px rgba(60, 40, 10, 0.13), 0 2px 8px rgba(60,40,10,0.07);
+          box-shadow: 0 24px 64px rgba(60,40,10,0.13), 0 2px 8px rgba(60,40,10,0.07);
         }
         .pdp-image-wrap::after {
           content: '';
@@ -129,7 +121,6 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
           border-radius: 4px;
           pointer-events: none;
         }
-
         .pdp-price {
           font-family: 'Cormorant Garamond', serif;
           font-size: 2rem;
@@ -145,26 +136,24 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
         }
       `}</style>
 
-      <div
-        className="w-full min-h-screen"
-        style={{ background: '#FAF7F3', fontFamily: 'Manrope, sans-serif' }}
-      >
-        <div className="h-28" />
+      <div className="w-full min-h-screen" style={{ background: '#FAF7F3', fontFamily: 'Manrope, sans-serif' }}>
+        <div className="h-20 md:h-28" />
 
         {/* ── Main product section ── */}
-        <div
-          className="w-full flex justify-center px-6 md:px-12"
-          style={{ paddingBottom: '100px' }}
-        >
-          <div
-            className="flex flex-col md:flex-row gap-16 md:gap-20 items-start max-w-6xl w-full"
-          >
+        <div className="w-full flex justify-center px-4 sm:px-6 md:px-12" style={{ paddingBottom: '60px' }}>
+          <div className="flex flex-col md:flex-row gap-8 md:gap-20 items-start max-w-6xl w-full">
 
-            {/* LEFT: Image */}
-            <div ref={imageRef} className="flex-shrink-0 w-full md:w-auto" style={{ width: 'min(480px, 100%)' }}>
+            {/* Image — centered + smaller on mobile */}
+            <div
+              ref={imageRef}
+              className="w-full md:w-auto flex justify-center md:justify-start flex-shrink-0"
+            >
               <div
                 className="pdp-image-wrap"
-                style={{ width: '100%', aspectRatio: '1 / 1', minHeight: '320px' }}
+                style={{
+                  width: 'clamp(180px, 45vw, 480px)',
+                  aspectRatio: '1 / 1',
+                }}
               >
                 <img
                   src={product.image}
@@ -178,65 +167,53 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
               </div>
             </div>
 
-            {/* RIGHT: Info */}
+            {/* Info — centered on mobile, left on desktop, with side padding */}
             <div
               ref={infoRef}
-              className="flex flex-col justify-start"
-              style={{ flex: 1, paddingTop: '0.5rem', minWidth: 0 }}
+              className="flex flex-col items-center md:items-start text-center md:text-left w-full"
+              style={{ flex: 1, minWidth: 0, paddingTop: "0.5rem" }}
             >
-              {/* Code */}
               {product.code && (
-                <p
-                  style={{
-                    fontFamily: 'Manrope, sans-serif',
-                    fontSize: '0.7rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    color: '#C8874A',
-                    marginBottom: '1.25rem',
-                  }}
-                >
+                <p style={{
+                  fontFamily: 'Manrope, sans-serif',
+                  fontSize: '0.7rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: '#C8874A',
+                  marginBottom: '1.25rem',
+                }}>
                   {product.code}
                 </p>
               )}
 
-              {/* Gold divider line — always visible */}
               <div className="pdp-divider" />
 
-              {/* Name */}
-              <h1
-                style={{
-                  fontFamily: 'Cormorant Garamond, serif',
-                  fontSize: 'clamp(36px, 4.5vw, 58px)',
-                  fontWeight: 300,
-                  lineHeight: 1.05,
-                  color: '#1a1208',
-                  marginBottom: '1.75rem',
-                  letterSpacing: '-0.01em',
-                }}
-              >
+              <h1 style={{
+                fontFamily: 'Cormorant Garamond, serif',
+                fontSize: 'clamp(28px, 5vw, 58px)',
+                fontWeight: 300,
+                lineHeight: 1.05,
+                color: '#1a1208',
+                marginBottom: '1.25rem',
+                letterSpacing: '-0.01em',
+              }}>
                 {product.name}
               </h1>
 
-              {/* Description */}
-              <p
-                style={{
-                  fontFamily: 'Manrope, sans-serif',
-                  fontSize: '0.95rem',
-                  fontWeight: 300,
-                  lineHeight: 1.85,
-                  color: '#5a4e42',
-                  marginBottom: '2.5rem',
-                  maxWidth: '480px',
-                }}
-              >
+              <p style={{
+                fontFamily: 'Manrope, sans-serif',
+                fontSize: '0.9rem',
+                fontWeight: 300,
+                lineHeight: 1.85,
+                color: '#5a4e42',
+                marginBottom: '1.75rem',
+              }}>
                 {product.description}
               </p>
 
-              {/* Specs */}
               {specs.length > 0 && (
-                <div style={{ marginBottom: '2.5rem' }}>
+                <div style={{ marginBottom: '1.75rem', width: '100%', maxWidth: '420px' }}>
                   {specs.map(({ label, value }) => (
                     <div key={label} className="pdp-spec-row">
                       <span className="pdp-spec-label">{label}</span>
@@ -246,20 +223,20 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
                 </div>
               )}
 
-              {/* Price */}
-              <p className="pdp-price" style={{ marginBottom: '2rem' }}>
+              <p className="pdp-price" style={{ marginBottom: '1.5rem' }}>
                 <span>€</span>{product.price.toLocaleString('el-GR')}
               </p>
 
               {/* Cart button */}
-              <CartButton
-                productId={product.id}
-                productName={product.name}
-                productPrice={product.price}
-                productImage={product.image}
-              />
+              <div className="w-full md:w-auto" style={{ maxWidth: '280px' }}>
+                <CartButton
+                  productId={product.id}
+                  productName={product.name}
+                  productPrice={product.price}
+                  productImage={product.image}
+                />
+              </div>
 
-              {/* Back */}
               <button className="pdp-back-btn" onClick={() => navigate(-1)}>
                 Back
               </button>
@@ -267,19 +244,13 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
           </div>
         </div>
 
-        {/* ── Divider ── */}
-        <div className="w-full flex justify-center px-6 md:px-12">
-          <div
-            className="max-w-6xl w-full"
-            style={{ borderTop: '1px solid #e0d6c8', marginBottom: '64px' }}
-          />
+        {/* Divider */}
+        <div className="w-full flex justify-center px-4 sm:px-6 md:px-12">
+          <div className="max-w-6xl w-full" style={{ borderTop: '1px solid #e0d6c8', marginBottom: '48px' }} />
         </div>
 
-        {/* ── Related products ── */}
-        <div
-          className="w-full flex justify-center px-6 md:px-12"
-          style={{ paddingBottom: '100px' }}
-        >
+        {/* Related products */}
+        <div className="w-full flex justify-center px-4 sm:px-6 md:px-12" style={{ paddingBottom: '80px' }}>
           <div className="max-w-6xl w-full">
             <RelatedProducts currentProductId={product.id} />
           </div>

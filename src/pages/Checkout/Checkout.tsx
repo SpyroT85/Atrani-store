@@ -89,7 +89,7 @@ function InputField({
           className={`w-full border text-base text-gray-800 placeholder-gray-400 focus:outline-none transition-colors ${
             mono ? "font-mono tracking-widest" : "font-medium"
           } ${isEmailInvalid ? "border-red-400" : focused ? "border-[#C8874A]" : "border-gray-300"}`}
-          style={{ padding: '18px 20px', borderRadius: '0' }}
+          style={{ padding: '14px 16px', borderRadius: '0' }}
         />
         {toggleable && (
           <button
@@ -136,7 +136,7 @@ function CardInput({ onChange }: { onChange: (v: string) => void }) {
       >
         <span
           className="flex-1 font-mono tracking-widest text-base text-gray-800"
-          style={{ padding: '18px 20px' }}
+          style={{ padding: '14px 16px' }}
         >
           {digits.length === 0
             ? <span className="text-gray-400">{"●●●● ●●●● ●●●● ●●●●"}</span>
@@ -168,7 +168,7 @@ function CardInput({ onChange }: { onChange: (v: string) => void }) {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-base font-bold tracking-widest text-[#C8874A] uppercase" style={{ marginBottom: '32px' }}>
+    <h2 className="text-sm font-bold tracking-widest text-[#C8874A] uppercase" style={{ marginBottom: '24px' }}>
       {children}
     </h2>
   );
@@ -183,7 +183,7 @@ function CountrySelect({ value, onChange }: { value: string; onChange: (v: strin
       <div
         onClick={() => setOpen(!open)}
         className="border border-gray-300 text-base font-medium text-gray-800 cursor-pointer flex justify-between items-center"
-        style={{ padding: '18px 20px', borderRadius: '0' }}
+        style={{ padding: '14px 16px', borderRadius: '0' }}
       >
         <span className={value ? "text-gray-800" : "text-gray-400"}>
           {value || "Select a country"}
@@ -197,7 +197,7 @@ function CountrySelect({ value, onChange }: { value: string; onChange: (v: strin
               key={c}
               onClick={() => { onChange(c); setOpen(false); }}
               className="text-base font-medium text-gray-800 cursor-pointer transition-colors"
-              style={{ padding: '20px 24px', borderBottom: '1px solid #f0f0f0' }}
+              style={{ padding: '16px 20px', borderBottom: '1px solid #f0f0f0' }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#FDF0E8')}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'white')}
             >
@@ -222,26 +222,27 @@ export default function CheckoutPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-[#F2F2F2] flex justify-center" style={{ padding: '80px 60px' }}>
-        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-start" style={{ gap: '32px' }}>
+      <div className="min-h-screen bg-[#F2F2F2] flex justify-center" style={{ padding: '60px 16px' }}>
+        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-6 lg:gap-8">
 
-          <div className="bg-white rounded-xl" style={{ padding: '72px', width: '780px', minWidth: '780px', minHeight: '800px' }}>
-            <h1 className="text-3xl font-bold tracking-widest uppercase text-gray-900" style={{ marginBottom: '48px' }}>
+          {/* ── Form ── */}
+          <div className="bg-white rounded-xl w-full" style={{ padding: 'clamp(24px, 5vw, 64px)' }}>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-widest uppercase text-gray-900" style={{ marginBottom: '36px' }}>
               Checkout
             </h1>
 
-            <div style={{ marginBottom: '48px' }}>
+            <div style={{ marginBottom: '36px' }}>
               <SectionTitle>Billing Details</SectionTitle>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <InputField label="Full Name" placeholder="Mario Rossi" value={form.name} onChange={set("name")} />
                 <InputField label="Email Address" placeholder="example@mail.com" value={form.email} onChange={set("email")} type="email" />
                 <InputField label="Phone Number" placeholder="+1 202-555-0136" value={form.phone} onChange={set("phone")} type="tel" />
               </div>
             </div>
 
-            <div style={{ marginBottom: '48px' }}>
+            <div style={{ marginBottom: '36px' }}>
               <SectionTitle>Shipping Info</SectionTitle>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <InputField label="Address" placeholder="1137 Williams Avenue" value={form.address} onChange={set("address")} className="sm:col-span-2" />
                 <InputField label="Zip Code" placeholder="10001" value={form.zip} onChange={set("zip")} />
                 <InputField label="City" placeholder="Atrani" value={form.city} onChange={set("city")} />
@@ -249,11 +250,11 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <div style={{ marginBottom: '48px' }}>
+            <div style={{ marginBottom: '36px' }}>
               <SectionTitle>Payment Details</SectionTitle>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <div className="flex flex-col justify-start">
-                  <label className="text-sm font-bold text-gray-800">Payment</label>
+                  <label className="text-sm font-bold text-gray-800">Payment Method</label>
                 </div>
                 <div className="flex flex-col gap-4">
                   <label className="flex items-center gap-4 cursor-pointer">
@@ -279,12 +280,13 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shrink-0" style={{ padding: '40px', width: '380px' }}>
-            <h2 className="text-base font-bold tracking-widest uppercase text-gray-900 mb-8">Summary</h2>
+          {/* ── Summary ── */}
+          <div className="bg-white rounded-xl w-full lg:w-auto lg:shrink-0" style={{ padding: '32px', minWidth: '280px', maxWidth: '380px' }}>
+            <h2 className="text-sm font-bold tracking-widest uppercase text-gray-900 mb-6">Summary</h2>
             {cartItems.length === 0 ? (
-              <p className="text-sm text-gray-400 text-center mb-8">No Items</p>
+              <p className="text-sm text-gray-400 text-center mb-6">No Items</p>
             ) : (
-              <ul className="mb-8 flex flex-col gap-6">
+              <ul className="mb-6 flex flex-col gap-5">
                 {cartItems.map((item, i) => (
                   <li key={i} className="flex items-center justify-between">
                     <div>
@@ -296,7 +298,7 @@ export default function CheckoutPage() {
                 ))}
               </ul>
             )}
-            <div className="flex flex-col gap-3 mb-6">
+            <div className="flex flex-col gap-3 mb-4">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500 uppercase tracking-wide">Total</span>
                 <span className="text-sm font-bold text-gray-900">${subtotal.toFixed(2)}</span>
@@ -310,11 +312,11 @@ export default function CheckoutPage() {
                 <span className="text-sm font-bold text-gray-900">${tax.toFixed(2)}</span>
               </div>
             </div>
-            <div className="flex justify-between items-center" style={{ marginBottom: '32px' }}>
+            <div className="flex justify-between items-center" style={{ marginBottom: '24px' }}>
               <span className="text-sm text-gray-500 uppercase tracking-wide">Grand Total</span>
               <span className="text-lg font-bold text-[#C8874A]">${grandTotal.toFixed(2)}</span>
             </div>
-            <button className="w-full bg-[#C8874A] hover:bg-[#b8773a] transition-colors text-white text-xs font-bold tracking-widest uppercase rounded" style={{ padding: '20px' }}>
+            <button className="w-full bg-[#C8874A] hover:bg-[#b8773a] transition-colors text-white text-xs font-bold tracking-widest uppercase rounded" style={{ padding: '18px' }}>
               Continue & Pay
             </button>
           </div>

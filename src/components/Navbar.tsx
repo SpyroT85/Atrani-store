@@ -98,7 +98,7 @@ const Navbar = () => {
           </div>
 
           {/* Nav links */}
-          <div className="flex justify-center gap-4 md:gap-12 uppercase whitespace-nowrap" style={{ ...navLinkStyle, marginLeft: 'clamp(0px, 10vw, 120px)' }}>
+          <div className="flex justify-center gap-4 md:gap-12 uppercase whitespace-nowrap" style={{ ...navLinkStyle, marginLeft: 'clamp(0px, 20vw, 10px)' }}>
             <Link to="/" className="transition cursor-pointer" style={{ ...navLinkStyle, color: 'white' }}
               onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
               onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Home</Link>
@@ -165,9 +165,7 @@ const Navbar = () => {
             <Link to="/inkwells" className="uppercase transition cursor-pointer" style={{ ...navLinkStyle, color: 'white' }}
               onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
               onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Inkwells</Link>
-            <a href="#contact" className="transition cursor-pointer" style={{ ...navLinkStyle, color: 'white', whiteSpace: 'nowrap', position: 'relative', zIndex: 10 }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Contact Us</a>
+
           </div>
 
           {/* Cart button */}
@@ -228,35 +226,35 @@ const Navbar = () => {
                 )}
               </div>
 
-              <div>
-                <button onClick={() => toggleSection('inkwells')} className="w-full text-center transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', color: 'white', background: 'none', border: 'none' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'white')}>INKWELLS</button>
-                {expandedSection === 'inkwells' && (
-                  <div className="flex flex-col gap-4 pb-4" style={{ fontSize: '11px', fontFamily: 'Manrope, sans-serif', letterSpacing: '0.12em' }}>
-                    <Link to="/inkwells" style={{ color: 'white', padding: '8px 0' }} onClick={() => setIsMobileMenuOpen(false)}
-                      onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
-                      onMouseLeave={e => (e.currentTarget.style.color = 'white')}>All Inkwells</Link>
-                  </div>
-                )}
-              </div>
 
               <div>
-                <button onClick={() => toggleSection('compasses')} className="w-full text-center transition cursor-pointer" style={{ paddingTop: '16px', paddingBottom: '16px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', color: 'white', background: 'none', border: 'none' }}
+                <Link
+                  to="/inkwells"
+                  className="w-full text-center transition cursor-pointer block"
+                  style={{ paddingTop: '16px', paddingBottom: '16px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', color: 'white', background: 'none', border: 'none', textDecoration: 'none' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'white')}>COMPASSES</button>
-                {expandedSection === 'compasses' && (
-                  <div className="flex flex-col gap-4 pb-4" style={{ fontSize: '11px', fontFamily: 'Manrope, sans-serif', letterSpacing: '0.12em' }}>
-                    <Link to="/compasses" style={{ color: 'white', padding: '8px 0' }} onClick={() => setIsMobileMenuOpen(false)}
-                      onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
-                      onMouseLeave={e => (e.currentTarget.style.color = 'white')}>All Compasses</Link>
-                  </div>
-                )}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'white')}
+                >
+                  INKWELLS
+                </Link>
               </div>
 
-              <a href="#contact" style={{ paddingTop: '16px', paddingBottom: '16px', color: 'white' }} onClick={() => setIsMobileMenuOpen(false)}
-                onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'white')}>Contact Us</a>
+
+              <div>
+                <Link
+                  to="/compasses"
+                  className="w-full text-center transition cursor-pointer block"
+                  style={{ paddingTop: '16px', paddingBottom: '16px', fontFamily: 'Manrope, sans-serif', fontWeight: 600, letterSpacing: '0.15em', color: 'white', background: 'none', border: 'none', textDecoration: 'none' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#a37a41')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'white')}
+                >
+                  COMPASSES
+                </Link>
+              </div>
+
+
             </div>
           </div>
         )}
