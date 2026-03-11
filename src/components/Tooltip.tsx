@@ -20,7 +20,7 @@ export default function Tooltip({ text, children, position = "top" }: TooltipPro
   };
 
   const positionStyles: Record<string, React.CSSProperties> = {
-    top:    { bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)" },
+    top:    { bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-70%)" },
     bottom: { top:    "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)" },
     left:   { right:  "calc(100% + 8px)", top:  "50%", transform: "translateY(-50%)" },
     right:  { left:   "calc(100% + 8px)", top:  "50%", transform: "translateY(-50%)" },
@@ -58,8 +58,8 @@ export default function Tooltip({ text, children, position = "top" }: TooltipPro
         {/* Arrow */}
         <div style={{
           position: "absolute",
-          ...(position === "top"    ? { top: "100%",  left: "50%", transform: "translateX(-50%)", borderTop:    "5px solid #BFA57A", borderLeft: "5px solid transparent", borderRight: "5px solid transparent" } : {}),
-          ...(position === "bottom" ? { bottom: "100%", left: "50%", transform: "translateX(-50%)", borderBottom: "5px solid #BFA57A", borderLeft: "5px solid transparent", borderRight: "5px solid transparent" } : {}),
+          ...(position === "top" ? { top: "100%", left: "71%", transform: "translateX(-50%)", borderTop:    "5px solid #BFA57A", borderLeft: "5px solid transparent", borderRight: "5px solid transparent" } : {}),
+          ...(position === "bottom" ? { bottom: "100%", left: "60%", transform: "translateX(-40%)", borderBottom: "5px solid #BFA57A", borderLeft: "5px solid transparent", borderRight: "5px solid transparent" } : {}),
           ...(position === "left"   ? { left: "100%",  top:  "50%", transform: "translateY(-50%)", borderLeft:   "5px solid #BFA57A", borderTop:  "5px solid transparent", borderBottom: "5px solid transparent" } : {}),
           ...(position === "right"  ? { right: "100%", top:  "50%", transform: "translateY(-50%)", borderRight:  "5px solid #BFA57A", borderTop:  "5px solid transparent", borderBottom: "5px solid transparent" } : {}),
         }} />

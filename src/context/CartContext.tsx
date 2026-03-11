@@ -1,5 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react';
-import { useCartInternal } from '../hooks/useCart';
+import { useCartInternal } from '../hooks/useCartInternal';
 
 export interface CartItem {
   id: string;

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
 import { IoClose, IoCartOutline } from 'react-icons/io5';
+import Tooltip from '../Tooltip';
 
 export interface CartItem {
   id: string;
@@ -140,11 +141,16 @@ export default function CartDrawer({
                   {/* Price + delete */}
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px', flexShrink: 0 }}>
                     <span style={{ fontSize: '14px', fontWeight: 700, color: '#A67C52' }}>€{(item.price * item.qty).toFixed(2)}</span>
-                    <button onClick={() => onRemoveItem(item.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ccc', padding: 0, display: 'flex' }}
-                      onMouseEnter={e => (e.currentTarget.style.color = '#e05252')}
-                      onMouseLeave={e => (e.currentTarget.style.color = '#ccc')}>
-                      <FiTrash2 size={14} />
-                    </button>
+                    <Tooltip text="Remove" position="top">
+                      <button
+                        onClick={() => onRemoveItem(item.id)}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ccc', padding: 0, display: 'flex' }}
+                        onMouseEnter={e => (e.currentTarget.style.color = '#e05252')}
+                        onMouseLeave={e => (e.currentTarget.style.color = '#ccc')}
+                      >
+                        <FiTrash2 size={14} />
+                      </button>
+                    </Tooltip>
                   </div>
                 </div>
               );

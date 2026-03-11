@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { products } from '@/data/products';
 import type { Products } from '@/types/productTypes';
 import ViewDetailsButton from '@/components/ui/ViewDetailsButton';
+import { Link } from 'react-router-dom';
 
 interface RelatedProductsProps {
   currentProductId: string;
@@ -190,18 +191,20 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProductId }) =
                 }}
               >
                 <div style={{ height: '200px', overflow: 'hidden', background: '#f5f0ea' }}>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transform: hoveredId === product.id ? 'scale(1.05)' : 'scale(1)',
-                      transition: 'transform 0.5s ease',
-                    }}
-                    loading="lazy"
-                  />
+                  <Link to={getProductPath(product.category, product.id)} style={{ display: 'block', height: '100%' }}>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        transform: hoveredId === product.id ? 'scale(1.05)' : 'scale(1)',
+                        transition: 'transform 0.5s ease',
+                      }}
+                      loading="lazy"
+                    />
+                  </Link>
                 </div>
                 <div style={{ padding: '0.9rem 0.9rem 1rem' }}>
                   <div style={{ width: '24px', height: '1px', background: '#C8874A', marginBottom: '0.5rem' }} />
