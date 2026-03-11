@@ -8,15 +8,16 @@ interface CartButtonProps {
   productName: string;
   productPrice: number;
   productImage?: string;
+  productCategory?: string;
   className?: string;
 }
 
-const CartButton: React.FC<CartButtonProps> = ({ productId, productName, productPrice, productImage, className }) => {
+const CartButton: React.FC<CartButtonProps> = ({ productId, productName, productPrice, productImage, productCategory, className }) => {
   const { addItem, removeItem, items } = useCart();
   const currentQty = items.find((i: { id: string; qty: number }) => i.id === productId)?.qty ?? 0;
 
   const handleAdd = () => {
-    addItem({ id: productId, name: productName, price: productPrice, image: productImage });
+    addItem({ id: productId, name: productName, price: productPrice, image: productImage, category: productCategory });
   };
 
   const buttonStyles = "bg-[#b89e6f] text-white uppercase tracking-widest text-sm font-bold transition border-none cursor-pointer rounded-md flex items-center justify-center w-full";
@@ -29,7 +30,7 @@ const CartButton: React.FC<CartButtonProps> = ({ productId, productName, product
   };
 
   const handleIncrease = () => {
-    addItem({ id: productId, name: productName, price: productPrice, image: productImage });
+    addItem({ id: productId, name: productName, price: productPrice, image: productImage, category: productCategory });
   };
 
   if (currentQty === 0) {

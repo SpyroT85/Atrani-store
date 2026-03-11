@@ -37,7 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, description, image, rev
         {description}
       </p>
       <button className="bg-accent text-white px-8 py-3 uppercase tracking-widest text-sm font-bold hover:bg-accentLight transition-colors rounded w-fit">
-        See Details
+        View Details
       </button>
     </div>
   </div>

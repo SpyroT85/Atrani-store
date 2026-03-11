@@ -32,7 +32,7 @@ const Hero = () => {
                   style={{ paddingLeft: '4rem', paddingRight: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}
                   aria-label="View product details"
                 >
-                  SEE PRODUCT
+                  VIEW PRODUCT
                 </Button>
               </Link>
             </div>
@@ -56,7 +56,7 @@ const Hero = () => {
                 style={{ paddingLeft: '4rem', paddingRight: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem' }}
                 aria-label="View product details"
               >
-                See Details
+                View Details
               </Button>
             </Link>
           </div>

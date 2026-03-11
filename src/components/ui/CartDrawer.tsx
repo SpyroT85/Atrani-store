@@ -9,6 +9,7 @@ export interface CartItem {
   price: number;
   qty: number;
   image?: string;
+  category?: string;
 }
 
 interface CartDrawerProps {
@@ -20,7 +21,7 @@ interface CartDrawerProps {
   onRemoveItem: (id: string) => void;
 }
 
-const SHIPPING = 19.95;
+const SHIPPING = 9.90;
 
 export default function CartDrawer({
   isOpen,
@@ -31,7 +32,9 @@ export default function CartDrawer({
   onRemoveItem,
 }: CartDrawerProps) {
   const subtotal = items.reduce((acc, item) => acc + item.price * item.qty, 0);
-  const grandTotal = subtotal + (items.length > 0 ? SHIPPING : 0);
+  const TAX_RATE = 0.24;
+  const tax = subtotal * TAX_RATE;
+  const grandTotal = subtotal + (items.length > 0 ? SHIPPING : 0) + tax;
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -105,70 +108,47 @@ export default function CartDrawer({
               <p style={{ fontSize: '14px', margin: 0, fontWeight: 'bold' }}>Your cart is empty</p>
             </div>
           ) : (
-            items.map((item) => (
-              <div key={item.id} style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-                padding: '16px 24px',
-                borderBottom: '1px solid #f5f5f5',
-              }}>
-                {/* Image or placeholder */}
-                <div style={{
-                  width: '80px',
-                  height: '80px',
-                  borderRadius: '6px',
-                  overflow: 'hidden',
-                  flexShrink: 0,
-                  backgroundColor: '#f5f5f5',
-                }}>
-                  {item.image ? (
-                    <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  ) : (
-                    <div style={{ width: '100%', height: '100%', backgroundColor: '#e8e8e8' }} />
-                  )}
-                </div>
-
-                {/* Name + price + qty */}
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ margin: '0 0 4px 0', fontSize: '14px', fontWeight: 700, color: '#1a1a1a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {item.name}
-                  </p>
-                  <p style={{ margin: '0 0 10px 0', fontSize: '13px', color: '#A67C52', fontWeight: 600 }}>
-                    €{item.price.toFixed(2)}
-                  </p>
-                  {/* Qty stepper horizontal */}
-                  <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #e0e0e0', borderRadius: '4px', width: 'fit-content' }}>
-                    <button
-                      onClick={() => onUpdateQty(item.id, Math.max(1, item.qty - 1))}
-                      style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px 10px', fontSize: '14px', color: '#666' }}
-                    >−</button>
-                    <span style={{ padding: '4px 10px', fontSize: '14px', fontWeight: 700, color: '#1a1a1a', borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0' }}>
-                      {item.qty}
-                    </span>
-                    <button
-                      onClick={() => onUpdateQty(item.id, item.qty + 1)}
-                      style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px 10px', fontSize: '14px', color: '#666' }}
-                    >+</button>
+            items.map((item) => {
+              const productUrl = item.category ? `/${item.category}/${item.id}` : `/products/${item.id}`;
+              return (
+                <div key={item.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', padding: '16px 24px', borderBottom: '1px solid #f5f5f5' }}>
+                  {/* Image */}
+                  <Link to={productUrl} onClick={onClose} style={{ flexShrink: 0 }}>
+                    <div style={{ width: '80px', height: '80px', borderRadius: '6px', overflow: 'hidden', backgroundColor: '#f5f5f5' }}>
+                      {item.image
+                        ? <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        : <div style={{ width: '100%', height: '100%', backgroundColor: '#e8e8e8' }} />}
+                    </div>
+                  </Link>
+                  {/* Name + qty */}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <Link to={productUrl} onClick={onClose} style={{ textDecoration: 'none' }}>
+                      <p style={{ margin: '0 0 6px 0', fontSize: '14px', fontWeight: 700, color: '#1a1a1a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                        onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
+                        onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
+                      >
+                        {item.name}
+                      </p>
+                    </Link>
+                    {/* qty stepper */}
+                    <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #e0e0e0', borderRadius: '4px', width: 'fit-content' }}>
+                      <button onClick={() => onUpdateQty(item.id, Math.max(1, item.qty - 1))} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px 10px', fontSize: '14px', color: '#666' }}>−</button>
+                      <span style={{ padding: '4px 10px', fontSize: '14px', fontWeight: 700, color: '#1a1a1a', borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0' }}>{item.qty}</span>
+                      <button onClick={() => onUpdateQty(item.id, item.qty + 1)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px 10px', fontSize: '14px', color: '#666' }}>+</button>
+                    </div>
+                  </div>
+                  {/* Price + delete */}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px', flexShrink: 0 }}>
+                    <span style={{ fontSize: '14px', fontWeight: 700, color: '#A67C52' }}>€{(item.price * item.qty).toFixed(2)}</span>
+                    <button onClick={() => onRemoveItem(item.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ccc', padding: 0, display: 'flex' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#e05252')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '#ccc')}>
+                      <FiTrash2 size={14} />
+                    </button>
                   </div>
                 </div>
-
-                {/* Line total + delete */}
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px', flexShrink: 0 }}>
-                  <span style={{ fontSize: '14px', fontWeight: 700, color: '#1a1a1a' }}>
-                    €{(item.price * item.qty).toFixed(2)}
-                  </span>
-                  <button
-                    onClick={() => onRemoveItem(item.id)}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ccc', padding: 0, display: 'flex' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#e05252')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#ccc')}
-                  >
-                    <FiTrash2 size={14} />
-                  </button>
-                </div>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
 
@@ -196,6 +176,10 @@ export default function CartDrawer({
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#999' }}>Shipping</span>
                 <span style={{ fontSize: '13px', fontWeight: 700, color: '#1a1a1a' }}>€{SHIPPING.toFixed(2)}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#999' }}>Tax (24%)</span>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#1a1a1a' }}>€{tax.toFixed(2)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '10px', borderTop: '1px solid #f0f0f0' }}>
                 <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, color: '#666' }}>Grand Total</span>

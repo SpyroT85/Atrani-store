@@ -234,6 +234,7 @@ export default function ProductDetailPage({ category }: ProductDetailPageProps) 
                   productName={product.name}
                   productPrice={product.price}
                   productImage={product.image}
+                  productCategory={category}
                 />
               </div>
 

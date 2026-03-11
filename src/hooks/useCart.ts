@@ -29,10 +29,7 @@ export function useCartInternal() {
   };
 
   const removeItem = (id: string) =>
-    setItems(prev => prev
-      .map(i => i.id === id ? { ...i, qty: i.qty - 1 } : i)
-      .filter(i => i.qty > 0)
-    );
+    setItems(prev => prev.filter(i => i.id !== id));
 
   const updateQty = (id: string, qty: number) =>
     setItems(prev => prev.map(i => i.id === id ? { ...i, qty } : i));

@@ -20,7 +20,7 @@ const FeaturedProducts = () => {
               <div className="flex justify-center md:justify-start">
                 <Link to="/watches/watches-limited" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
                   <Button variant="outline" className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md w-full" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
-                    See Details
+                    View Details
                   </Button>
                 </Link>
               </div>
@@ -89,7 +89,7 @@ const FeaturedProducts = () => {
               <div className="flex justify-center md:justify-start">
                 <Link to="/inkwells" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
                 <Button variant="outline" className="border-2 border-black text-black bg-transparent hover:bg-black hover:text-white uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem' }}>
-                  See Details
+                  View Details
                 </Button>
                 </Link>
               </div>
@@ -132,7 +132,7 @@ const FeaturedProducts = () => {
                 <div className="flex justify-center md:justify-start w-full">
                   <Link to="/compasses" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
                   <Button variant="outline" className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black uppercase tracking-widest text-sm font-bold cursor-pointer rounded-md" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
-                    See Details
+                    View Details
                   </Button>
                   </Link>
                 </div>
@@ -164,7 +164,7 @@ const FeaturedProducts = () => {
               </p>
               <Link to="/inkwells" style={{ display: 'inline-block', width: '100%' }} onClick={scrollToTop}>
                 <Button variant="outline" className="bg-[#BFA57A] text-white hover:text-white uppercase tracking-widest text-sm font-bold hover:bg-[#8a5e3a] transition border-none cursor-pointer rounded-md w-full" style={{ paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1.5rem', paddingBottom: '1.5rem', marginTop: '2rem' }}>
-                  See Details
+                  View Details
                 </Button>
               </Link>
             </div>

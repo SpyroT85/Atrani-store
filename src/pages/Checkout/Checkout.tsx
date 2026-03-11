@@ -1,7 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 import Layout from '../../components/Layout';
 import { MdError } from "react-icons/md";
+import { FiTrash2 } from "react-icons/fi";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import Tooltip from '../../components/Tooltip';
+import confetti from 'canvas-confetti';
 
 type PaymentMethod = "e-money" | "cash";
 
@@ -31,45 +36,23 @@ const initialForm: FormData = {
   walletPin: "",
 };
 
-interface CartItem {
-  name: string;
-  price: number;
-  qty: number;
-}
-
-const cartItems: CartItem[] = [];
-const SHIPPING = 19.95;
+const SHIPPING = 9.90;
 const COUNTRIES = ["Italy", "Greece", "Germany", "Denmark", "France"];
 
 function InputField({
-  label,
-  placeholder,
-  value,
-  onChange,
-  type = "text",
-  className = "",
-  maxLength,
-  mono = false,
-  toggleable = false,
+  label, placeholder, value, onChange, type = "text",
+  className = "", maxLength, mono = false, toggleable = false,
 }: {
-  label: string;
-  placeholder?: string;
-  value: string;
-  onChange: (v: string) => void;
-  type?: string;
-  className?: string;
-  maxLength?: number;
-  mono?: boolean;
-  toggleable?: boolean;
+  label: string; placeholder?: string; value: string;
+  onChange: (v: string) => void; type?: string; className?: string;
+  maxLength?: number; mono?: boolean; toggleable?: boolean;
 }) {
   const [focused, setFocused] = useState(false);
   const [touched, setTouched] = useState(false);
   const [visible, setVisible] = useState(false);
 
   const isEmailInvalid =
-    type === "email" &&
-    touched &&
-    value.length > 0 &&
+    type === "email" && touched && value.length > 0 &&
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
   const inputType = toggleable ? (visible ? "text" : "password") : type;
@@ -134,24 +117,15 @@ function CardInput({ onChange }: { onChange: (v: string) => void }) {
         style={{ borderRadius: '0' }}
         onClick={() => hiddenRef.current?.focus()}
       >
-        <span
-          className="flex-1 font-mono tracking-widest text-base text-gray-800"
-          style={{ padding: '14px 16px' }}
-        >
+        <span className="flex-1 font-mono tracking-widest text-base text-gray-800" style={{ padding: '14px 16px' }}>
           {digits.length === 0
             ? <span className="text-gray-400">{"●●●● ●●●● ●●●● ●●●●"}</span>
-            : visible ? formatted : maskedValue
-          }
+            : visible ? formatted : maskedValue}
         </span>
         <input
-          ref={hiddenRef}
-          type="text"
-          inputMode="numeric"
-          value={digits}
-          onChange={handleChange}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          maxLength={16}
+          ref={hiddenRef} type="text" inputMode="numeric" value={digits}
+          onChange={handleChange} onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)} maxLength={16}
           className="absolute opacity-0 w-0 h-0"
         />
         <button
@@ -210,15 +184,51 @@ function CountrySelect({ value, onChange }: { value: string; onChange: (v: strin
   );
 }
 
+const fmt = (n: number) => n % 1 === 0 ? String(n) : n.toFixed(2);
+
 export default function CheckoutPage() {
   const [form, setForm] = useState<FormData>(initialForm);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const [countdown, setCountdown] = useState(10);
+  const cart = useCart();
+  const cartItems = cart.items;
+  const navigate = useNavigate();
 
   const set = (key: keyof FormData) => (value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
-  const tax = 0;
+  const TAX_RATE = 0.24;
+  const tax = subtotal * TAX_RATE;
   const grandTotal = subtotal + SHIPPING + tax;
+
+  const handleOrder = () => {
+    setOrderPlaced(true);
+    cart.removeAll();
+    confetti({
+      particleCount: 120,
+      spread: 80,
+      origin: { y: 0.5 },
+      colors: ['#B89E6F', '#C8874A', '#fff', '#A67C52'],
+    });
+  };
+
+  useEffect(() => {
+    if (!orderPlaced) return;
+    setCountdown(10);
+    const interval = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setOrderPlaced(false);
+          navigate('/');
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [orderPlaced]);
 
   return (
     <Layout>
@@ -281,48 +291,184 @@ export default function CheckoutPage() {
           </div>
 
           {/* ── Summary ── */}
-          <div className="bg-white rounded-xl w-full lg:w-auto lg:shrink-0" style={{ padding: '32px', minWidth: '280px', maxWidth: '380px' }}>
+          <div className="bg-white rounded-xl w-full lg:w-auto lg:shrink-0" style={{ padding: '32px', minWidth: '320px', maxWidth: '480px' }}>
             <h2 className="text-sm font-bold tracking-widest uppercase text-gray-900 mb-6">Summary</h2>
+            <div className="h-4" />
             {cartItems.length === 0 ? (
               <p className="text-sm text-gray-400 text-center mb-6">No Items</p>
             ) : (
               <ul className="mb-6 flex flex-col gap-5">
-                {cartItems.map((item, i) => (
-                  <li key={i} className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-bold text-gray-900">{item.name}</p>
-                      <p className="text-sm text-gray-400">x{item.qty}</p>
-                    </div>
-                    <span className="text-sm font-bold text-gray-900">${(item.price * item.qty).toFixed(2)}</span>
-                  </li>
-                ))}
+                {cartItems.map((item, i) => {
+                  const productUrl = item.category ? `/${item.category}/${item.id}` : `/products/${item.id}`;
+                  return (
+                    <li key={i} className="flex items-stretch gap-3">
+                      <Link to={productUrl} style={{ display: 'block' }} tabIndex={0} aria-label={item.name}>
+                        {item.image && (
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-[70px] h-[70px] object-cover rounded bg-gray-100 border border-gray-200"
+                            style={{ minWidth: 70, minHeight: 70 }}
+                          />
+                        )}
+                      </Link>
+                      <div className="flex-1 flex flex-col gap-2">
+                        <div className="flex items-center justify-between">
+                          <Link to={productUrl} className="text-sm font-bold text-gray-900 hover:underline focus:underline" tabIndex={0} aria-label={item.name}>
+                            {item.name}
+                          </Link>
+                          <span className="text-sm font-bold ml-4" style={{ color: '#A67C52' }}>
+                            €{fmt(item.price * item.qty)}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 w-full">
+                          <div className="flex items-center" style={{ width: 70, height: 24, border: '1px solid #e5e5e5', borderRadius: 5, overflow: 'hidden', background: '#fff' }}>
+                            <button
+                              aria-label="Decrease quantity"
+                              onClick={() => item.qty > 1 ? cart.updateQty(item.id, item.qty - 1) : cart.removeItem(item.id)}
+                              className="flex-1 text-center text-gray-400 hover:text-[#C8874A] select-none"
+                              style={{ fontSize: 14, height: 28, minWidth: 16, cursor: 'pointer' }}
+                            >−</button>
+                            <span className="flex-1 text-center font-bold" style={{ fontSize: 13 }}>{item.qty}</span>
+                            <button
+                              aria-label="Increase quantity"
+                              onClick={() => cart.updateQty(item.id, item.qty + 1)}
+                              className="flex-1 text-center text-gray-400 hover:text-[#C8874A] select-none"
+                              style={{ fontSize: 14, height: 28, minWidth: 16, cursor: 'pointer' }}
+                            >+</button>
+                          </div>
+                          <div className="flex-1" />
+                          <Tooltip text="Remove" position="top">
+                            <button
+                              aria-label="Remove item"
+                              onClick={() => cart.removeItem(item.id)}
+                              className="text-gray-300 hover:text-red-500 transition-colors flex items-center justify-center"
+                              style={{ cursor: 'pointer' }}
+                            >
+                              <FiTrash2 size={14} />
+                            </button>
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             )}
+            <div className="h-4" />
             <div className="flex flex-col gap-3 mb-4">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500 uppercase tracking-wide">Total</span>
-                <span className="text-sm font-bold text-gray-900">${subtotal.toFixed(2)}</span>
+                <span className="text-sm font-bold text-gray-900">€{fmt(subtotal)}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500 uppercase tracking-wide">Shipping</span>
-                <span className="text-sm font-bold text-gray-900">${SHIPPING.toFixed(2)}</span>
+                <span className="text-sm font-bold text-gray-900">€{fmt(SHIPPING)}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-500 uppercase tracking-wide">Tax</span>
-                <span className="text-sm font-bold text-gray-900">${tax.toFixed(2)}</span>
+                <span className="text-sm text-gray-500 uppercase tracking-wide">Tax (24%)</span>
+                <span className="text-sm font-bold text-gray-900">€{fmt(tax)}</span>
               </div>
             </div>
             <div className="flex justify-between items-center" style={{ marginBottom: '24px' }}>
               <span className="text-sm text-gray-500 uppercase tracking-wide">Grand Total</span>
-              <span className="text-lg font-bold text-[#C8874A]">${grandTotal.toFixed(2)}</span>
+              <span className="text-lg font-bold text-[#C8874A]">€{fmt(grandTotal)}</span>
             </div>
-            <button className="w-full bg-[#C8874A] hover:bg-[#b8773a] transition-colors text-white text-xs font-bold tracking-widest uppercase rounded" style={{ padding: '18px' }}>
+            <button
+              onClick={handleOrder}
+              className="w-full bg-[#B89E6F] hover:bg-[#a88c5e] transition-colors text-white text-xs font-bold tracking-widest uppercase rounded"
+              style={{ padding: '18px', cursor: 'pointer' }}
+            >
               Continue & Pay
             </button>
           </div>
 
         </div>
       </div>
+
+      {/* ── Keyframes ── */}
+      <style>{`
+        @keyframes fadeInBackdrop {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideUpModal {
+          from { opacity: 0; transform: translateY(32px) scale(0.97); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes popIn {
+          0% { transform: scale(0.5); opacity: 0; }
+          70% { transform: scale(1.15); opacity: 1; }
+          100% { transform: scale(1); }
+        }
+      `}</style>
+
+      {/* ── Order Confirmation Modal ── */}
+      {orderPlaced && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '16px',
+            animation: 'fadeInBackdrop 0.3s ease',
+          }}
+          onClick={() => { setOrderPlaced(false); navigate('/'); }}
+        >
+          <div
+            style={{
+              backgroundColor: '#fff', borderRadius: '12px', padding: '48px 40px',
+              maxWidth: '480px', width: '100%', textAlign: 'center',
+              animation: 'slideUpModal 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* SVG Icon */}
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px', animation: 'popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both' }}>
+              <svg width="72" height="72" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 22h40l-4 28H16L12 22z"
+                  stroke="#B89E6F" strokeWidth="2.5" strokeLinejoin="round" fill="#FDF5EB"
+                />
+                <path
+                  d="M22 22c0-5.523 4.477-10 10-10s10 4.477 10 10"
+                  stroke="#B89E6F" strokeWidth="2.5" strokeLinecap="round" fill="none"
+                />
+                <circle cx="44" cy="44" r="12" fill="#B89E6F" />
+                <path
+                  d="M38.5 44l4 4 7-7"
+                  stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+
+            <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '2rem', fontWeight: 300, color: '#1a1208', marginBottom: '12px' }}>
+              Order Received!
+            </h2>
+            <p style={{ fontFamily: 'Manrope, sans-serif', fontSize: '0.9rem', color: '#5a4e42', lineHeight: 1.8, marginBottom: '32px' }}>
+              Thank you for your purchase. Your order has been received and you'll be notified shortly with updates on your delivery.
+            </p>
+
+            <Link
+              to="/"
+              onClick={() => setOrderPlaced(false)}
+              style={{
+                display: 'inline-block', backgroundColor: '#B89E6F', color: '#fff',
+                padding: '14px 32px', borderRadius: '6px', fontSize: '12px', fontWeight: 700,
+                letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none',
+                transition: 'background-color 0.2s ease',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#a88c5e')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#B89E6F')}
+            >
+              Back to Home
+            </Link>
+
+            <p style={{ marginTop: '16px', fontSize: '11px', color: '#bbb', letterSpacing: '0.05em', fontFamily: 'Manrope, sans-serif' }}>
+              Redirecting in {countdown}s...
+            </p>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }
