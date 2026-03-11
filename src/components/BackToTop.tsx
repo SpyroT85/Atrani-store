@@ -27,7 +27,7 @@ const BackToTop = () => {
         position: 'fixed',
         right: '30px',
         bottom: '40px',
-        zIndex: 100,
+        zIndex: 40,
         opacity: visible ? 1 : 0,
         pointerEvents: visible ? 'auto' : 'none',
         transition: 'opacity 0.8s ease',
