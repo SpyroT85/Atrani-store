@@ -6,12 +6,9 @@ import BackToTop from './components/BackToTop';
 import ScrollToTop from './components/ScrollToTop';
 import ProductDetailPage from './pages/Products/ProductDetailPage';
 import { Analytics } from "@vercel/analytics/react";
-
-// ── Eager loaded (always needed) ──
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
 
-// ── Lazy loaded (only when visited) ──
 const Atrani       = lazy(() => import('./pages/Watches/Atrani'));
 const Luxury       = lazy(() => import('./pages/Watches/Luxury'));
 const Smartwatches = lazy(() => import('./pages/Watches/Smartwatches'));
