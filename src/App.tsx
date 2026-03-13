@@ -5,6 +5,7 @@ import { CartProvider } from './context/CartContext';
 import BackToTop from './components/BackToTop';
 import ScrollToTop from './components/ScrollToTop';
 import ProductDetailPage from './pages/Products/ProductDetailPage';
+import { Analytics } from "@vercel/analytics/react";
 
 // ── Eager loaded (always needed) ──
 import Home from './pages/Home/Home';
@@ -41,6 +42,7 @@ const PageLoader = () => (
 function App() {
   return (
     <CartProvider>
+      <Analytics />
       <div style={{ position: 'relative', minHeight: '100vh', background: '#F1F1F1' }}>
         <BackToTop />
         <ScrollToTop />
